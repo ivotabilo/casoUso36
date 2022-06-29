@@ -21,13 +21,12 @@ public class RecursoTecnologico {
     private int periodicidadMantPreventivo;
     private int duracionMantPreventivo;
     private int fraccionHorariosTurnos;
-    
     private Modelo modelo;
-    //private Mantenimiento mantenimiento;
-    //private TipoRT tipoRT;
-    //private CambioEstadoRT estadoActual;
-    //private ArrayList<CambioEstadoRT> cambioEstado;
-    //private ArrayList<Turno> turno;
+    private Mantenimiento mantenimiento;
+    private TipoRecursoTecnologico tipoRT;
+    private CambioEstadoRT estadoActual;
+    private ArrayList<CambioEstadoRT> cambioEstado;
+    private ArrayList<Turno> turno;
     
     public int getNro() {
         return nro;
