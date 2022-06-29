@@ -27,13 +27,13 @@ public class AsignacionCientificoDelCI {
         this.fechaHasta = fechaHasta;
     }
 
-    public <any> getTurnos() {
+    /*public <any> getTurnos() {
         return turnos;
     }
 
     public void setTurnos(<any> turnos) {
         this.turnos = turnos;
-    }
+    }*/
 
     public PersonalCientifico getPersonalCientifico() {
         return personalCientifico;

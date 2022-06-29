@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Turno {
     private Date fechaGeneracion;
-    private Sring diaSemana;
+    private String diaSemana;
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
     private CambioEstadoTurno actual;
@@ -26,11 +26,11 @@ public class Turno {
         this.fechaGeneracion = fechaGeneracion;
     }
 
-    public Sring getDiaSemana() {
+    public String getDiaSemana() {
         return diaSemana;
     }
 
-    public void setDiaSemana(Sring diaSemana) {
+    public void setDiaSemana(String diaSemana) {
         this.diaSemana = diaSemana;
     }
 
@@ -58,11 +58,12 @@ public class Turno {
         this.actual = actual;
     }
 
-    public <any> getCambioEstado() {
+    /*public <any> getCambioEstado() {
         return cambioEstado;
     }
 
-    public void setCambioEstado(<any> cambioEstado) {
+    public void setCambioEstado(CambioEstadoTurno cambioEstado) {
         this.cambioEstado = cambioEstado;
     }
+    */
 }

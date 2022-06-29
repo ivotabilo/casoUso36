@@ -1,9 +1,13 @@
+package Model;
+
+import Model.Estado;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+
 
 @Entity
 public class CambioEstadoRT {
@@ -13,8 +17,8 @@ public class CambioEstadoRT {
     @SequenceGenerator(name = "CambioEstadoRT_id_seq", sequenceName = "CambioEstadoRT_id_seq", allocationSize = 1)
     private Integer ID;
     
-    private Date fechaHoraDesde;
-    private Date fechaHoraHasta;
+    private Date fechaDesde;
+    private Date fechaHasta;
     private Estado estado;
 
     public Estado getEstado() {
