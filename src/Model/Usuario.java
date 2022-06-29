@@ -1,5 +1,19 @@
+package Model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
 public class Usuario {
     //Atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Usuario_id_seq")
+    @SequenceGenerator(name = "Usuario_id_seq", sequenceName = "Usuario_id_seq", allocationSize = 1)
+    private Integer ID;
+    
     private String nombre;
     private String contrasenia;
     private boolean habilitado;

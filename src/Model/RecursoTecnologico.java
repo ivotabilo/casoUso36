@@ -1,8 +1,20 @@
-
+package Model;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
+@Entity
 public class RecursoTecnologico {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RecursoTecnologico_id_seq")
+    @SequenceGenerator(name = "RecursoTecnologico_id_seq", sequenceName = "RecursoTecnologico_id_seq", allocationSize = 1)
+    private Integer ID;
+    
     private int nro;
     private Date fechaAlta;
     private String imagen;
@@ -11,12 +23,12 @@ public class RecursoTecnologico {
     private int fraccionHorariosTurnos;
     
     private Modelo modelo;
-    private Mantenimiento mantenimiento;
-    private TipoRT tipoRT;
-    private CambioEstadoRT estadoActual;
-    private ArrayList<CambioEstadoRT> cambioEstado;
-    private ArrayList<Turno> turno;
-
+    //private Mantenimiento mantenimiento;
+    //private TipoRT tipoRT;
+    //private CambioEstadoRT estadoActual;
+    //private ArrayList<CambioEstadoRT> cambioEstado;
+    //private ArrayList<Turno> turno;
+    
     public int getNro() {
         return nro;
     }
@@ -73,6 +85,7 @@ public class RecursoTecnologico {
         this.modelo = modelo;
     }
 
+    /*
     public Mantenimiento getMantenimiento() {
         return mantenimiento;
     }
@@ -112,6 +125,7 @@ public class RecursoTecnologico {
     public void setTurno(ArrayList<Turno> turno) {
         this.turno = turno;
     }
+    */
     
     //miModeloYMarca
     //conocerRT

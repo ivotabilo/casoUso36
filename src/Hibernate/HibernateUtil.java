@@ -24,17 +24,18 @@ public class HibernateUtil  {
             //nombre de usuario de la db
             conf.setProperty("hibernate.connection.username","postgres");
             //contraseña
-            conf.setProperty("hibernate.connection.password","00");
+            conf.setProperty("hibernate.connection.password","123");
             //cantidad de conecciones
             conf.setProperty("hibernate.connection.pool_size","10");
             //politica de creaccion de la base de datos
             conf.setProperty("hibernate.hbm2ddl.auto","update");
             //paquetes con persitencia
-            conf.addPackage("Modelos");
+            conf.addPackage("Model");
             
             //estructura para agregar clases que necesiten persistencia
-            //conf.addAnnotatedClass(tpi.Modelos.DetalleExposicion.class);
+            //Ejemplo: conf.addAnnotatedClass(tpi.Model.DetalleExposicion.class);
             
+            conf.addAnnotatedClass(Model.Modelo.class);
             
             try {
                     sessionFactory = conf.buildSessionFactory();

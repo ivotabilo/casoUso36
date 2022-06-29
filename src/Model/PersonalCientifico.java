@@ -1,5 +1,19 @@
+package Model;
+        
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
 public class PersonalCientifico {
     //atributos
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PersonalCientifico_id_seq")
+    @SequenceGenerator(name = "PersonalCientifico_id_seq", sequenceName = "PersonalCientifico_id_seq", allocationSize = 1)
+    private Integer ID;
+
     private int legajo;
     private String nombre;
     private String apellido;
@@ -8,7 +22,7 @@ public class PersonalCientifico {
     private String correoElectronicoPersonal;
     private int telCelular;
     private Usuario usuario;
-
+    
     public Usuario getUsuario() {
         return usuario;
     }
