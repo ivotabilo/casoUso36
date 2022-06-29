@@ -1,3 +1,10 @@
+/nbproject/
+/manifest.mf
+/build.xml
 /nbproject/private/
+/src/META-INF/
 /build/
-/MyLib/
+/dist/
+/nbproject/private/
+/test/
+

@@ -24,7 +24,7 @@ public class HibernateUtil  {
             //nombre de usuario de la db
             conf.setProperty("hibernate.connection.username","postgres");
             //contraseña
-            conf.setProperty("hibernate.connection.password","123");
+            conf.setProperty("hibernate.connection.password","00");
             //cantidad de conecciones
             conf.setProperty("hibernate.connection.pool_size","10");
             //politica de creaccion de la base de datos

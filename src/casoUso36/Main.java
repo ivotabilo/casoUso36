@@ -11,6 +11,6 @@ import Hibernate.HibernateUtil;
  */
 public class Main {
    public static void main(String[] args) {
-        //HibernateUtil.inicializar();
+        HibernateUtil.inicializar();
     }
 }
