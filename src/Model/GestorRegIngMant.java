@@ -10,11 +10,21 @@ public class GestorRegIngMant {
     private List<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado;
     private RecursoTecnologico SelRt;
     private Date IngFecFin;
-    private Date IngRazMant;
+    private String IngRazMant;
     private List<Turno> turnosRT;
     private List<Turno> turnosRtOrdenado;
     private String tipoNotificacion;
     private Date fechaActual;
+    
+    private PantRegIngMant form;
+
+    public PantRegIngMant getForm() {
+        return form;
+    }
+
+    public void setForm(PantRegIngMant form) {
+        this.form = form;
+    }
     
     public void nuevoIngMantCorre(){
         //to-do
@@ -46,7 +56,7 @@ public class GestorRegIngMant {
         this.IngFecFin=ingFecFin;
     }
     
-    public void tomarIngRazMant(Date ingRazMant){
+    public void tomarIngRazMant(String ingRazMant){
         this.IngRazMant=ingRazMant;
     }
     
