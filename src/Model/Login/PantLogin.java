@@ -1,10 +1,12 @@
 package Model.Login;
 
+import Model.Menu.GestorMenu;
 import Modelos.ABMGn;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-public class Login extends ABMGn {
+public class PantLogin extends ABMGn {
     GestorLogin gl;
 
     public GestorLogin getGestorLogin() {
@@ -37,7 +39,7 @@ public class Login extends ABMGn {
         return esNulo(txtCorreo.getText())|| esNulo(txtContraseña.getText());
     }
     
-    public Login() {
+    public PantLogin() {
         initComponents();
     }
     
@@ -63,8 +65,8 @@ public class Login extends ABMGn {
 
         btnCrearCuentaUsuario.setText("Crear Cuenta Usuario");
         btnCrearCuentaUsuario.setAlignmentY(0.0F);
-        btnCrearCuentaUsuario.setBorderPainted(false);
         btnCrearCuentaUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCrearCuentaUsuario.setEnabled(false);
         btnCrearCuentaUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnCrearCuentaUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,36 +188,19 @@ public class Login extends ABMGn {
     }//GEN-LAST:event_btnCrearCuentaUsuarioActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        /*String item = (String)cbTipoLogin.getSelectedItem();
         if (!cuadrosVasios()){    
             if(getGestorLogin().existeUsuario()){ 
-                switch(item){
-                    case "Usuario" -> {//hace referencia a cliente
-                        dispose();
-                        GestorVistaPrincipalCliente gp = new GestorVistaPrincipalCliente();
-                        gp.open();
-                        break;
-                    }
-                    case "Comercio" -> {  
-                        GestorVistaPrincipalComercio gp = new GestorVistaPrincipalComercio();
-                        gp.open();
-                        gp.datosLogin((Comercio) this.getGestorLogin().traerUsuario(Comercio.class, this.getTxtCorreo().getText(), 1));
-                        dispose();
-                        break;
-                    }
-                    case "Administrador" -> {
-                        GestorVistaPrincipalAdmin gp = new GestorVistaPrincipalAdmin ();
-                        gp.open();
-                        dispose();
-                        break;
-                    }
-                }
+                dispose();
+                GestorMenu gm = new GestorMenu();
+                gm.open();
+                //crear session
+               
             }else{
                 JOptionPane.showMessageDialog(this, "Datos ingresados no corresponden a ningun usuario, Intente de nuevo");
             }
         }else{
             JOptionPane.showMessageDialog(this, "Complete los campos obligatorios");
-        } */
+        }
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -236,21 +221,23 @@ public class Login extends ABMGn {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new PantLogin().setVisible(true);
             }
         });
     }

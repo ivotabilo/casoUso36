@@ -1,48 +1,30 @@
 package Model.Login;
 
 import Generico.GestorGn;
+import Model.Usuario;
 
 public class GestorLogin extends GestorGn {
-    private Login form;
+    private PantLogin form;
 
-    public Login getForm() {
+    public PantLogin getForm() {
         return form;
     }
 
-    public void setForm(Login form) {
+    public void setForm(PantLogin form) {
         this.form = form;
     }
     
     public boolean existeUsuario(){
-        //int item = this.getForm().getCbTipoLogin().getSelectedIndex();
-        
-        /*if(item == 0){
-            Cliente U;
-            if(buscarUsuario(Cliente.class,this.getForm().getTxtCorreo().getText())==true){
-                U = (Cliente) traerUsuario(Cliente.class,this.getForm().getTxtCorreo().getText(),1); 
-                return String.valueOf(this.getForm().getTxtContraseña().getPassword()).equals(U.getContraseña());
-            }
+        Usuario U;
+        if(buscarUsuario(Usuario.class,this.getForm().getTxtCorreo().getText())==true){
+            U = (Usuario) traerUsuario(Usuario.class,this.getForm().getTxtCorreo().getText(),1); 
+            return String.valueOf(this.getForm().getTxtContraseña().getPassword()).equals(U.getContrasenia());
         }
-        if(item == 1){
-            Comercio U;
-            if(buscarUsuario(Comercio.class,this.getForm().getTxtCorreo().getText())==true){
-                U = (Comercio) traerUsuario(Comercio.class,this.getForm().getTxtCorreo().getText(),1); 
-                return String.valueOf(this.getForm().getTxtContraseña().getPassword()).equals(U.getContraseña());
-            }
-        }
-        if(item == 2){
-            Administrador U;
-            if(buscarUsuario(Administrador.class,this.getForm().getTxtCorreo().getText())==true){
-                U = (Administrador) traerUsuario(Administrador.class,this.getForm().getTxtCorreo().getText(),1);
-                return String.valueOf(this.getForm().getTxtContraseña().getPassword()).equals(U.getContraseña());
-            }
-        }
-        return false;*/
-        return true; //to-do
+        return false;
     }
     
     public void open() {
-        setForm(new Login());
+        setForm(new PantLogin());
         getForm().setVisible(true); 
     }
 }
