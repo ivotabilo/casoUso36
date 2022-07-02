@@ -1,5 +1,6 @@
 package Model;
         
+import java.util.ArrayList;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,7 @@ public class PersonalCientifico {
     private String correoElectronicoPersonal;
     private int telCelular;
     private Usuario usuario;
+    private ArrayList<AsignacionResponsableTecnicoRT> asigRespTenicoRt;
     
     public Usuario getUsuario() {
         return usuario;
@@ -87,6 +89,12 @@ public class PersonalCientifico {
         this.telCelular = telCelular;
     }
     
-    //esTuUsuario
-    //burcarRTenEstadoDisponible
+    public PersonalCientifico esTuUsuario(String nombreUs){ 
+        if (this.usuario.getNombre().equals(nombreUs)){  //invocamos el metodo getNombre de personal cientifico y lo comparamos con el nombre q nos pasaron como parametro
+            return this;
+        }
+    } // revisar porque no toma el return del if
+    public AsignacionResponsableTenicoRT burcarRTenEstadoDisponible(){
+    
+}
 }

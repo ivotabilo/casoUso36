@@ -1,10 +1,13 @@
-package Model;
+ package Model;
 
 import java.util.Date;
 import java.util.List;
 
 public class GestorRegIngMant {
-    private Usuario usuarioLog;
+    // el puntero no es al usuario sino a la sesion 2 junio
+    private String usuarioLog;
+    //private Usuario usuarioLog;  2 junio
+    private Sesion activaSesion; 
     private PersonalCientifico personalCientificoDeUsu;
     private List<RecursoTecnologico> recursosTecnologicosDisponibles;
     private List<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado;
@@ -30,8 +33,12 @@ public class GestorRegIngMant {
         //to-do
     }
     
-    public Usuario buscarRtUsLog(){
-        return new Usuario();//to-do
+    /*public  Usuario buscarRtUsLog(){
+        return new Usuario();//to-do  // no es public void buscarRTusLog??
+    }
+*/
+    public void buscarRtUsLog(){
+        this.usuarioLog=this.activaSesion.buscarUsuario();
     }
 
     public PersonalCientifico obtenerPersDeUsu(){
