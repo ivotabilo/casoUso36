@@ -23,7 +23,7 @@ public class PersonalCientifico {
     private String correoElectronicoPersonal;
     private int telCelular;
     private Usuario usuario;
-    private ArrayList<AsignacionResponsableTecnicoRT> asigRespTenicoRt;
+    private ArrayList<AsignacionResponsableTecnicoRT> asigRespTecnicoRt;
     
     public Usuario getUsuario() {
         return usuario;
@@ -93,8 +93,15 @@ public class PersonalCientifico {
         if (this.usuario.getNombre().equals(nombreUs)){  //invocamos el metodo getNombre de personal cientifico y lo comparamos con el nombre q nos pasaron como parametro
             return this;
         }
+        return null;
     } // revisar porque no toma el return del if
-    public AsignacionResponsableTenicoRT burcarRTenEstadoDisponible(){
-    
-}
+    /*public AsignacionResponsableTecnicoRT burcarRTenEstadoDisponible(){
+        ArrayList<RecursoTecnologico> misRtDisponibles;
+        for(AsignacionResponsableTecnicoRT asignacion:asigRespTecnicoRt){
+            if(asignacion.esActual()){
+                asignacion.misRT();
+            }
+        }
+        return null;
+    }*/
 }

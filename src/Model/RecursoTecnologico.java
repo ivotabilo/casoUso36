@@ -127,7 +127,9 @@ public class RecursoTecnologico {
     */
     
     //miModeloYMarca
-    //conocerRT
+    public void conocerRT(){
+        this.estadoActual.conocerActual();
+    }
     //buscarTurnosPendientes
     //conocerCambioEstadoActual
     

@@ -19,7 +19,7 @@ public class AsignacionResponsableTecnicoRT {
     private Date fechaDesde;
     private Date fechaHasta;
     private PersonalCientifico pc;
-    private ArrayList<RecursoTecnologico> RT;
+    private ArrayList<RecursoTecnologico> recursoTecnologico;
 
     public Date getFechaDesde() {
         return fechaDesde;
@@ -46,13 +46,23 @@ public class AsignacionResponsableTecnicoRT {
     }
 
     public ArrayList<RecursoTecnologico> getRT() {
-        return RT;
+        return recursoTecnologico;
     }
 
-    public void setRT(ArrayList<RecursoTecnologico> RT) {
-        this.RT = RT;
+    public void setRT(ArrayList<RecursoTecnologico> recursoTecnologico) {
+        this.recursoTecnologico = recursoTecnologico;
     }
     
-    //esActual
-    //misRT
+    public boolean esActual(){
+        if (this.fechaHasta==null){
+            return true;
+        }
+        return false;
+    }
+    public void misRT(){
+       for(RecursoTecnologico rt:recursoTecnologico){
+           if(recursoTecnologico.conocerRT()) 
+       }
+        
+    }
 }

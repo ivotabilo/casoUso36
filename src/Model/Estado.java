@@ -11,9 +11,14 @@ public class Estado {
     
     
     
-    /*
-    esDisponible
-    esConfirmado
+    
+    public boolean esDisponible(){
+        if(this.nombre.equalsIgnoreCase("disponible")){
+          return true;  
+        }
+        return false;
+    }
+    /*esConfirmado
     esPendiente
     esAambitoTurno
     esCanceladoPorMantenimientoCorrectivo
