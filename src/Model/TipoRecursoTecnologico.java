@@ -1,8 +1,23 @@
 
 package Model;
 
-public class TipoRecursoTecnologico {
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
+public class TipoRecursoTecnologico implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TipoRecursoTecnologico_id_seq")
+    @SequenceGenerator(name = "TipoRecursoTecnologico_id_seq", sequenceName = "TipoRecursoTecnologico_id_seq", allocationSize = 1)
+    private Integer ID;
+    @Column(columnDefinition = "TEXT")
     private String nomre;
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
 
     public String getNomre() {

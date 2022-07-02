@@ -1,28 +1,43 @@
 package Model;
         
+import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class PersonalCientifico {
+public class PersonalCientifico implements Serializable {
     //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PersonalCientifico_id_seq")
     @SequenceGenerator(name = "PersonalCientifico_id_seq", sequenceName = "PersonalCientifico_id_seq", allocationSize = 1)
     private Integer ID;
 
+    @Column(name="legajo", columnDefinition="Integer default '0'")
     private int legajo;
+    @Column(columnDefinition = "TEXT")
     private String nombre;
+    @Column(columnDefinition = "TEXT")
     private String apellido;
+    @Column(name="nroDocumento", columnDefinition="Integer default '0'")
     private int nroDocumento;
+    @Column(columnDefinition = "TEXT")
     private String correoElectronicoInstitucional;
+    @Column(columnDefinition = "TEXT")
     private String correoElectronicoPersonal;
+    @Column(name="telCelular", columnDefinition="Integer default '0'")
     private int telCelular;
+    @OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Usuario usuario;
+    @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private ArrayList<AsignacionResponsableTecnicoRT> asigRespTecnicoRt;
     
     public Usuario getUsuario() {

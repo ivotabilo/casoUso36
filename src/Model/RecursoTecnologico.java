@@ -1,31 +1,48 @@
 package Model;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-public class RecursoTecnologico {
+public class RecursoTecnologico implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RecursoTecnologico_id_seq")
     @SequenceGenerator(name = "RecursoTecnologico_id_seq", sequenceName = "RecursoTecnologico_id_seq", allocationSize = 1)
     private Integer ID;
     
+    @Column(name="nro", columnDefinition="Integer default '0'")
     private int nro;
     private Date fechaAlta;
+    @Column(columnDefinition = "TEXT")
     private String imagen;
+    @Column(name="periodicidadMantPreventivo", columnDefinition="Integer default '0'")
     private int periodicidadMantPreventivo;
+    @Column(name="duracionMantPreventivo", columnDefinition="Integer default '0'")
     private int duracionMantPreventivo;
+    @Column(name="fraccionHorariosTurnos", columnDefinition="Integer default '0'")
     private int fraccionHorariosTurnos;
+    @OneToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Modelo modelo;
+    @OneToMany(targetEntity = Mantenimiento.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Mantenimiento mantenimiento;
+    @OneToOne(targetEntity = TipoRecursoTecnologico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private TipoRecursoTecnologico tipoRT;
+    @OneToOne(targetEntity = CambioEstadoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private CambioEstadoRT estadoActual;
+    @OneToMany(targetEntity = CambioEstadoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private ArrayList<CambioEstadoRT> cambioEstado;
+    @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private ArrayList<Turno> turno;
     
     public int getNro() {

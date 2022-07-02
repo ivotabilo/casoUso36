@@ -1,22 +1,32 @@
 
 package Model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
-public class Estado {
+
+public class Estado implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Estado_id_seq")
+    @SequenceGenerator(name = "Estado_id_seq", sequenceName = "Estado_id_seq", allocationSize = 1)
+    private Integer ID;
+    @Column(columnDefinition = "TEXT")
     private String nombre;
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
+    @Column(columnDefinition = "TEXT")
     private String ambito;
+    @Column(name = "esReservable", columnDefinition = "Boolean default 'false'")
     private boolean esReservable;
+    @Column(name = "esCancelable", columnDefinition = "Boolean default 'false'")
     private boolean esCancelable;
-    
-    
-    
-    
+     
     public boolean esDisponible(){
-        if(this.nombre.equalsIgnoreCase("disponible")){
-          return true;  
-        }
-        return false;
+        return this.nombre.equalsIgnoreCase("disponible");
     }
     /*esConfirmado
     esPendiente

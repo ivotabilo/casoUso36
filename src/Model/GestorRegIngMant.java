@@ -100,4 +100,9 @@ public class GestorRegIngMant {
     public void crearMantenimiento(){
         //to-do
     }
+    
+    public void open() {
+        setForm(new PantRegIngMant());
+        getForm().setVisible(true); 
+    }
 }
