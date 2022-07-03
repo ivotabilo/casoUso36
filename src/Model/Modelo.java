@@ -20,6 +20,7 @@ public class Modelo implements Serializable{
     
     @Column(columnDefinition = "TEXT")
     private String nombre;
+    private Marca marca;
     
     public String getNombre() {
         return nombre;
@@ -28,6 +29,12 @@ public class Modelo implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Modelo(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
     
     
 }
