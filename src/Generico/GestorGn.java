@@ -54,13 +54,13 @@ public class GestorGn extends GestorHibernate {
     
     public Object traerUsuario(Class clase,String cadena,int max){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
-            .add (Restrictions.eq("estado",true)).setMaxResults(max).add(Restrictions.eq("correoElectronico", cadena));  
+            .add (Restrictions.eq("habilitado",true)).setMaxResults(max).add(Restrictions.eq("nombre", cadena));  
         return crit.list().get(0);
     }
     
     public boolean buscarUsuario(Class clase,String cadena){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.asc("id"))
-            .add (Restrictions.eq("estado",true)).add (Restrictions.eq("correoElectronico",cadena)) ;
+            .add (Restrictions.eq("habilitado",true)).add (Restrictions.eq("nombre",cadena)) ;
         return !crit.list().isEmpty();
     }
 }

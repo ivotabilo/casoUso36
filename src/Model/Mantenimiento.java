@@ -1,12 +1,24 @@
 
 package Model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
-public class Mantenimiento {
+public class Mantenimiento implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Mantenimiento_id_seq")
+    @SequenceGenerator(name = "Mantenimiento_id_seq", sequenceName = "Mantenimiento_id_seq", allocationSize = 1)
+    private Integer ID;
+    
     private Date fefhaFin;
     private Date fechaInicio;
     private Date fechaInicioPrevista;
+    @Column(columnDefinition = "TEXT")
     private String motivoMantenimiento;
 
     public Mantenimiento(Date fefhaFin, Date fechaInicio, String motivoMantenimiento) {
@@ -45,7 +57,5 @@ public class Mantenimiento {
 
     public void setMotivoMantenimiento(String motivoMantenimiento) {
         this.motivoMantenimiento = motivoMantenimiento;
-    }
-    
-    
+    }  
 }

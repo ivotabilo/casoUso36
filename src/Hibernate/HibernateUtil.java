@@ -36,6 +36,20 @@ public class HibernateUtil  {
             //Ejemplo: conf.addAnnotatedClass(tpi.Model.DetalleExposicion.class);
             
             conf.addAnnotatedClass(Model.Modelo.class);
+            conf.addAnnotatedClass(Model.Usuario.class);
+            conf.addAnnotatedClass(Model.Turno.class);
+            conf.addAnnotatedClass(Model.TipoRecursoTecnologico.class);
+            conf.addAnnotatedClass(Model.Sesion.class);
+            conf.addAnnotatedClass(Model.RecursoTecnologico.class);
+            conf.addAnnotatedClass(Model.PersonalCientifico.class);
+            conf.addAnnotatedClass(Model.Marca.class);
+            conf.addAnnotatedClass(Model.Mantenimiento.class);
+            conf.addAnnotatedClass(Model.Estado.class);
+            conf.addAnnotatedClass(Model.CambioEstadoTurno.class);
+            conf.addAnnotatedClass(Model.CambioEstadoRT.class);
+            conf.addAnnotatedClass(Model.AsignacionResponsableTecnicoRT.class);
+            conf.addAnnotatedClass(Model.AsignacionCientificoDelCI.class);
+            
             
             try {
                     sessionFactory = conf.buildSessionFactory();
