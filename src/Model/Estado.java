@@ -29,14 +29,25 @@ public class Estado implements Serializable{
     public boolean esDisponible(){
         return this.nombre.equalsIgnoreCase("disponible");
     }
-    /*esConfirmado
-    esPendiente
-    esAambitoTurno
-    esCanceladoPorMantenimientoCorrectivo
-    esAmbitoRT
-    esConIngresoAMantenimientoCorrectivo
-*/
-
+    public boolean esConfirmado(){
+        return this.nombre.equalsIgnoreCase("confirmado");
+    }
+    public boolean esPendienteConf(){
+        return this.nombre.equalsIgnoreCase("pendiente confirmacion");
+    }
+    public boolean esAambitoTurno (){
+        return this.ambito.equalsIgnoreCase("turno");
+    }
+    public boolean esAmbitoRT(){
+        return this.ambito.equalsIgnoreCase("recurso");
+    }
+    
+    public boolean esCanceladoPorMantenimientoCorrectivo(){
+        return this.nombre.equalsIgnoreCase("cancelado por mantenimiento correctivo");
+    }
+    public boolean esConIngresoAMantenimientoCorrectivo(){
+        return this.nombre.equalsIgnoreCase("ingresado a mantenimiento correctivo");
+    }
     public String getNombre() {
         return nombre;
     }

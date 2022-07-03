@@ -54,5 +54,9 @@ public class CambioEstadoRT implements Serializable{
     public void setFechaHoraHasta(Date fechaHoraHasta) {
         this.fechaHoraHasta = fechaHoraHasta;
     }
+
+    public boolean conocerActual(){
+        return this.estado.esDisponible();
+    }
     //mostrarCambioEstadoRT
 }
