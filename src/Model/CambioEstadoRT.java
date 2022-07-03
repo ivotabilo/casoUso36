@@ -1,6 +1,5 @@
 package Model;
 
-import Model.Estado;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
@@ -9,9 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-
 
 @Entity
 public class CambioEstadoRT implements Serializable {
@@ -23,7 +21,7 @@ public class CambioEstadoRT implements Serializable {
     
     private Date fechaDesde;
     private Date fechaHasta;
-    @OneToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToOne(targetEntity = Estado.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Estado estado;
 
     public Estado getEstado() {

@@ -1,16 +1,17 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -23,10 +24,11 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
     
     private Date fechaDesde;
     private Date fechaHasta;
-    @OneToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private PersonalCientifico pc;
-    @OneToMany(targetEntity = RecursoTecnologico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private ArrayList<RecursoTecnologico> recursoTecnologico;
+    @ManyToMany(targetEntity = RecursoTecnologico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    private Set<RecursoTecnologico> recursoTecnologico = new HashSet();
+
 
     public Date getFechaDesde() {
         return fechaDesde;
@@ -52,11 +54,11 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
         this.pc = pc;
     }
 
-    public ArrayList<RecursoTecnologico> getRT() {
+    public Set<RecursoTecnologico> getRT() {
         return recursoTecnologico;
     }
 
-    public void setRT(ArrayList<RecursoTecnologico> recursoTecnologico) {
+    public void setRT(Set<RecursoTecnologico> recursoTecnologico) {
         this.recursoTecnologico = recursoTecnologico;
     }
     

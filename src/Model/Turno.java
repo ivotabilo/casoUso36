@@ -2,7 +2,8 @@ package Model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class Turno implements Serializable {
     @OneToOne(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private CambioEstadoTurno actual;
     @OneToMany(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private ArrayList<CambioEstadoTurno> cambioEstado;
+    private Set<CambioEstadoTurno> cambioEstado = new HashSet();
     
     /*
     esRangoFecha

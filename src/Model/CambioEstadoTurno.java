@@ -3,13 +3,15 @@ package Model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+@Entity
 public class CambioEstadoTurno implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CambioEstadoTurno_id_seq")
@@ -18,7 +20,7 @@ public class CambioEstadoTurno implements Serializable{
     
     private Date fechaHoraDesde;
     private Date fechaHoraHasta;
-    @OneToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToOne(targetEntity = Estado.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Estado estado;
 
     public Estado getEstado() {

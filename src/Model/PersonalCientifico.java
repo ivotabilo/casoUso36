@@ -1,7 +1,8 @@
 package Model;
         
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,6 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 public class PersonalCientifico implements Serializable {
-    //atributos
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PersonalCientifico_id_seq")
     @SequenceGenerator(name = "PersonalCientifico_id_seq", sequenceName = "PersonalCientifico_id_seq", allocationSize = 1)
@@ -37,8 +37,8 @@ public class PersonalCientifico implements Serializable {
     private int telCelular;
     @OneToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Usuario usuario;
-    @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private ArrayList<AsignacionResponsableTecnicoRT> asigRespTecnicoRt;
+    @OneToMany(targetEntity = AsignacionResponsableTecnicoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    private Set<AsignacionResponsableTecnicoRT> asigRespTecnicoRt = new HashSet();
     
     public Usuario getUsuario() {
         return usuario;

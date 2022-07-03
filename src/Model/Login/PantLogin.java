@@ -50,7 +50,7 @@ public class PantLogin extends ABMGn {
         jPanel1 = new javax.swing.JPanel();
         btnCrearCuentaUsuario = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        lbCorreo = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         lbContraseña = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JPasswordField();
@@ -93,7 +93,7 @@ public class PantLogin extends ABMGn {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingresar"));
 
-        lbCorreo.setText("Correo Electronico * :");
+        lbNombre.setText("Nombre * :");
 
         lbContraseña.setText("Contraseña * :");
 
@@ -123,7 +123,7 @@ public class PantLogin extends ABMGn {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lbCorreo)
+                        .addComponent(lbNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtCorreo))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -144,7 +144,7 @@ public class PantLogin extends ABMGn {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbCorreo)
+                    .addComponent(lbNombre)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -249,7 +249,7 @@ public class PantLogin extends ABMGn {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbCampoObligatorio;
     private javax.swing.JLabel lbContraseña;
-    private javax.swing.JLabel lbCorreo;
+    private javax.swing.JLabel lbNombre;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtCorreo;
     // End of variables declaration//GEN-END:variables

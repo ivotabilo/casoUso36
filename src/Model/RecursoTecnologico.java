@@ -1,7 +1,9 @@
 package Model;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -32,18 +35,18 @@ public class RecursoTecnologico implements Serializable {
     private int duracionMantPreventivo;
     @Column(name="fraccionHorariosTurnos", columnDefinition="Integer default '0'")
     private int fraccionHorariosTurnos;
-    @OneToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @ManyToOne(targetEntity = Modelo.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Modelo modelo;
     @OneToMany(targetEntity = Mantenimiento.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private Mantenimiento mantenimiento;
-    @OneToOne(targetEntity = TipoRecursoTecnologico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    private Set<Mantenimiento> mantenimiento = new HashSet();
+    @ManyToOne(targetEntity = TipoRecursoTecnologico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private TipoRecursoTecnologico tipoRT;
     @OneToOne(targetEntity = CambioEstadoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private CambioEstadoRT estadoActual;
     @OneToMany(targetEntity = CambioEstadoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private ArrayList<CambioEstadoRT> cambioEstado;
+    private Set<CambioEstadoRT> cambioEstado = new HashSet();
     @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private ArrayList<Turno> turno;
+    private Set<Turno> turno = new HashSet();
     
     public int getNro() {
         return nro;

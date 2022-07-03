@@ -2,8 +2,10 @@ package Model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-
+@Entity
 public class AsignacionCientificoDelCI implements Serializable{
     
     @Id
@@ -21,7 +23,7 @@ public class AsignacionCientificoDelCI implements Serializable{
     private Date fechaDesde;
     private Date fechaHasta;
     @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private ArrayList<Turno> turnos;
+    private Set<Turno> turnos = new HashSet();
     @OneToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private PersonalCientifico personalCientifico;
     

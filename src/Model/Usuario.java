@@ -10,7 +10,6 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Usuario implements Serializable {
-    //Atributos
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Usuario_id_seq")
     @SequenceGenerator(name = "Usuario_id_seq", sequenceName = "Usuario_id_seq", allocationSize = 1)
