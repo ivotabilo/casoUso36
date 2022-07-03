@@ -111,7 +111,7 @@ public class PersonalCientifico implements Serializable {
         return null;
     } 
 
-    // revisar porque no toma el return del if
+   
     public ArrayList<RecursoTecnologico> burcarRTenEstadoDisponible(){
         ArrayList<RecursoTecnologico> misRtDisponibles = new ArrayList<RecursoTecnologico>();
         ArrayList<AsignacionResponsableTecnicoRT> asignacionesActuales = new ArrayList<AsignacionResponsableTecnicoRT>();

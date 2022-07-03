@@ -105,4 +105,5 @@ public class GestorRegIngMant {
         setForm(new PantRegIngMant());
         getForm().setVisible(true); 
     }
+    
 }
