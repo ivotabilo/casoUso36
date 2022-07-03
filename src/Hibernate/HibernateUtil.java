@@ -35,7 +35,6 @@ public class HibernateUtil  {
             //estructura para agregar clases que necesiten persistencia
             //Ejemplo: conf.addAnnotatedClass(tpi.Model.DetalleExposicion.class);
             
-            conf.addAnnotatedClass(Model.Modelo.class);
             conf.addAnnotatedClass(Model.Usuario.class);
             conf.addAnnotatedClass(Model.Turno.class);
             conf.addAnnotatedClass(Model.TipoRecursoTecnologico.class);
@@ -46,9 +45,11 @@ public class HibernateUtil  {
             conf.addAnnotatedClass(Model.Mantenimiento.class);
             conf.addAnnotatedClass(Model.Estado.class);
             conf.addAnnotatedClass(Model.CambioEstadoTurno.class);
-            conf.addAnnotatedClass(Model.CambioEstadoRT.class);
             conf.addAnnotatedClass(Model.AsignacionResponsableTecnicoRT.class);
             conf.addAnnotatedClass(Model.AsignacionCientificoDelCI.class);
+            conf.addAnnotatedClass(Model.CambioEstadoRT.class);
+            conf.addAnnotatedClass(Model.Modelo.class);
+            
             
             
             try {

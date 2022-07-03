@@ -1,6 +1,7 @@
 package Model;
         
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -110,8 +111,8 @@ public class PersonalCientifico implements Serializable {
         }
         return null;
     } 
-    //para que hibernate tome las listas tienen que ser Set (son listas sin elementos repetidos) hay que reemplazar los ArrayList por Set
-    // revisar porque no toma el return del if
+
+   
     public ArrayList<RecursoTecnologico> burcarRTenEstadoDisponible(){
         ArrayList<RecursoTecnologico> misRtDisponibles = new ArrayList<RecursoTecnologico>();
         ArrayList<AsignacionResponsableTecnicoRT> asignacionesActuales = new ArrayList<AsignacionResponsableTecnicoRT>();
@@ -123,7 +124,7 @@ public class PersonalCientifico implements Serializable {
         }
         
         for (AsignacionResponsableTecnicoRT asignacionesActuale : asignacionesActuales) {
-            ArrayList<RecursoTecnologico> recursosTecnologicos = asignacionesActuale.misRT();
+            ArrayList<RecursoTecnologico> recursosTecnologicos = (ArrayList<RecursoTecnologico>) asignacionesActuale.misRT();
             for (RecursoTecnologico recursoTecnologico : recursosTecnologicos) {
                 if (recursoTecnologico.conocerCambioEstadoActual().getEstado().esDisponible()){
                     misRtDisponibles.add(recursoTecnologico);

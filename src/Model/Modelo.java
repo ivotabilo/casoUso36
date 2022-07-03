@@ -1,6 +1,5 @@
 package Model;
 
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +20,9 @@ public class Modelo implements Serializable{
     @Column(columnDefinition = "TEXT")
     private String nombre;
     private Marca marca;
+
+    public Modelo() {
+    }
     
     public String getNombre() {
         return nombre;
@@ -34,7 +36,4 @@ public class Modelo implements Serializable{
         this.nombre = nombre;
     }
 
-    
-    
-    
 }

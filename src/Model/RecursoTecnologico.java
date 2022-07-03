@@ -172,12 +172,12 @@ public class RecursoTecnologico implements Serializable {
     }
     
     //devuelve un puntero de la clase actual de recurso recnologico
-    public RecursoTecnologico conocerRT() throws CloneNotSupportedException{ //ver bien implementacion
+    /*public RecursoTecnologico conocerRT() throws CloneNotSupportedException{ //ver bien implementacion
         if (this.estadoActual.conocerActual()){
             return (RecursoTecnologico) this.clone();           
         }
         return null;
-    }
+    }*/
     
     // devuelve el estado actual del recurso tecnologico
     public CambioEstadoRT conocerCambioEstadoActual(){

@@ -16,16 +16,16 @@ public class TipoRecursoTecnologico implements Serializable {
     @SequenceGenerator(name = "TipoRecursoTecnologico_id_seq", sequenceName = "TipoRecursoTecnologico_id_seq", allocationSize = 1)
     private Integer ID;
     @Column(columnDefinition = "TEXT")
-    private String nomre;
+    private String nombre;
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
-    public String getNomre() {
-        return nomre;
+    public String getNombre() {
+        return nombre;
     }
 
     public void setNomre(String nomre) {
-        this.nomre = nomre;
+        this.nombre = nomre;
     }
 
     public String getDescripcion() {

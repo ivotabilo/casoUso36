@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -69,7 +70,7 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
         return false;
     }
     public ArrayList<RecursoTecnologico> misRT(){
-       return recursoTecnologico;
+       return (ArrayList<RecursoTecnologico>) recursoTecnologico;
         
     }
 }
