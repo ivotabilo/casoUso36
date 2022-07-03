@@ -17,6 +17,7 @@ public class Modelo {
     private Integer ID;
 
     private String nombre;
+    private Marca marca;
     
     public String getNombre() {
         return nombre;
@@ -25,6 +26,12 @@ public class Modelo {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Modelo(String nombre) {
+        this.nombre = nombre;
+    }
+
+    
     
     
 }

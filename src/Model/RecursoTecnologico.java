@@ -27,7 +27,8 @@ public class RecursoTecnologico {
     private CambioEstadoRT estadoActual;
     private ArrayList<CambioEstadoRT> cambioEstado;
     private ArrayList<Turno> turno;
-    
+
+      
     public int getNro() {
         return nro;
     }
@@ -126,11 +127,42 @@ public class RecursoTecnologico {
     }
     */
     
-    //miModeloYMarca
-    public void conocerRT(){
-        this.estadoActual.conocerActual();
+    public RecursoTecnologico() {
+        
     }
+    public RecursoTecnologico(Integer ID, int nro, Date fechaAlta, String imagen, int periodicidadMantPreventivo, int duracionMantPreventivo, int fraccionHorariosTurnos, Modelo modelo, Mantenimiento mantenimiento, TipoRecursoTecnologico tipoRT, CambioEstadoRT estadoActual, ArrayList<CambioEstadoRT> cambioEstado, ArrayList<Turno> turno) {
+        this.ID = ID;
+        this.nro = nro;
+        this.fechaAlta = fechaAlta;
+        this.imagen = imagen;
+        this.periodicidadMantPreventivo = periodicidadMantPreventivo;
+        this.duracionMantPreventivo = duracionMantPreventivo;
+        this.fraccionHorariosTurnos = fraccionHorariosTurnos;
+        this.modelo = modelo;
+        this.mantenimiento = mantenimiento;
+        this.tipoRT = tipoRT;
+        this.estadoActual = estadoActual;
+        this.cambioEstado = cambioEstado;
+        this.turno = turno;
+    }
+    
     //buscarTurnosPendientes
-    //conocerCambioEstadoActual
+    
+    public void miModeloYMarca(){
+        
+    }
+    
+    //devuelve un puntero de la clase actual de recurso recnologico
+    public RecursoTecnologico conocerRT() throws CloneNotSupportedException{ //ver bien implementacion
+        if (this.estadoActual.conocerActual()){
+            return (RecursoTecnologico) this.clone();           
+        }
+        return null;
+    }
+    
+    // devuelve el estado actual del recurso tecnologico
+    public CambioEstadoRT conocerCambioEstadoActual(){
+        return this.estadoActual;
+    }
     
 }

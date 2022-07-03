@@ -59,10 +59,8 @@ public class AsignacionResponsableTecnicoRT {
         }
         return false;
     }
-    public void misRT(){
-       for(RecursoTecnologico rt:recursoTecnologico){
-           if(recursoTecnologico.conocerRT()) 
-       }
+    public ArrayList<RecursoTecnologico> misRT(){
+       return recursoTecnologico;
         
     }
 }

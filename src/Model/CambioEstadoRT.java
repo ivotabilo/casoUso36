@@ -46,8 +46,12 @@ public class CambioEstadoRT {
         this.fechaHasta = fechaHasta;
     }
     
-    public void conocerActual(){
-        this.estado.esDisponible();
+    
+    
+    
+    
+    public boolean conocerActual(){
+        return this.estado.esDisponible();
     }
     //new
 }

@@ -94,14 +94,30 @@ public class PersonalCientifico {
             return this;
         }
         return null;
-    } // revisar porque no toma el return del if
-    /*public AsignacionResponsableTecnicoRT burcarRTenEstadoDisponible(){
-        ArrayList<RecursoTecnologico> misRtDisponibles;
+    } 
+
+    // revisar porque no toma el return del if
+    public ArrayList<RecursoTecnologico> burcarRTenEstadoDisponible(){
+        ArrayList<RecursoTecnologico> misRtDisponibles = new ArrayList<RecursoTecnologico>();
+        ArrayList<AsignacionResponsableTecnicoRT> asignacionesActuales = new ArrayList<AsignacionResponsableTecnicoRT>();
+        
         for(AsignacionResponsableTecnicoRT asignacion:asigRespTecnicoRt){
             if(asignacion.esActual()){
-                asignacion.misRT();
+                asignacionesActuales.add(asignacion);
             }
         }
-        return null;
-    }*/
+        
+        for (AsignacionResponsableTecnicoRT asignacionesActuale : asignacionesActuales) {
+            ArrayList<RecursoTecnologico> recursosTecnologicos = asignacionesActuale.misRT();
+            for (RecursoTecnologico recursoTecnologico : recursosTecnologicos) {
+                if (recursoTecnologico.conocerCambioEstadoActual().getEstado().esDisponible()){
+                    misRtDisponibles.add(recursoTecnologico);
+                }
+            }
+        }
+            
+            
+                
+        return misRtDisponibles;
+    }
 }
