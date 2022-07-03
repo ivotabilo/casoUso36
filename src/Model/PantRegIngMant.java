@@ -29,15 +29,19 @@ public class PantRegIngMant extends ABMGn {
     }
     
     public void opcRecIngMantCorrectivo(){
+        //llamar a habilitarPantalla
         //to-do
     }
     
     public void habilitarPantalla(){
+        //bloquear vista para seleccion de RT
+        //llamar al gestor con nuevoingresomantenimientocorrectivo
         //to-do
     }
     
     public void mostrarYSolSelRt(List<RecursoTecnologico> RT){
         //to-do (guardar en variable)
+        //mostrar los recursos en pantall
     }
     
     public void tomarSelRt(){

@@ -4,9 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class GestorRegIngMant {
-    // el puntero no es al usuario sino a la sesion 2 junio
     private String usuarioLog;
-    //private Usuario usuarioLog;  2 junio
     private Sesion activaSesion; 
     private PersonalCientifico personalCientificoDeUsu;
     private List<RecursoTecnologico> recursosTecnologicosDisponibles;
@@ -21,6 +19,104 @@ public class GestorRegIngMant {
     
     private PantRegIngMant form;
 
+    public String getUsuarioLog() {
+        return usuarioLog;
+    }
+
+    public void setUsuarioLog(String usuarioLog) {
+        this.usuarioLog = usuarioLog;
+    }
+
+    public Sesion getActivaSesion() {
+        return activaSesion;
+    }
+
+    public void setActivaSesion(Sesion activaSesion) {
+        this.activaSesion = activaSesion;
+    }
+
+    public PersonalCientifico getPersonalCientificoDeUsu() {
+        return personalCientificoDeUsu;
+    }
+
+    public void setPersonalCientificoDeUsu(PersonalCientifico personalCientificoDeUsu) {
+        this.personalCientificoDeUsu = personalCientificoDeUsu;
+    }
+
+    public List<RecursoTecnologico> getRecursosTecnologicosDisponibles() {
+        return recursosTecnologicosDisponibles;
+    }
+
+    public void setRecursosTecnologicosDisponibles(List<RecursoTecnologico> recursosTecnologicosDisponibles) {
+        this.recursosTecnologicosDisponibles = recursosTecnologicosDisponibles;
+    }
+
+    public List<RecursoTecnologico> getRecursosTecnologicosDisponiblesOrdenado() {
+        return recursosTecnologicosDisponiblesOrdenado;
+    }
+
+    public void setRecursosTecnologicosDisponiblesOrdenado(List<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado) {
+        this.recursosTecnologicosDisponiblesOrdenado = recursosTecnologicosDisponiblesOrdenado;
+    }
+
+    public RecursoTecnologico getSelRt() {
+        return SelRt;
+    }
+
+    public void setSelRt(RecursoTecnologico SelRt) {
+        this.SelRt = SelRt;
+    }
+
+    public Date getIngFecFin() {
+        return IngFecFin;
+    }
+
+    public void setIngFecFin(Date IngFecFin) {
+        this.IngFecFin = IngFecFin;
+    }
+
+    public String getIngRazMant() {
+        return IngRazMant;
+    }
+
+    public void setIngRazMant(String IngRazMant) {
+        this.IngRazMant = IngRazMant;
+    }
+
+    public List<Turno> getTurnosRT() {
+        return turnosRT;
+    }
+
+    public void setTurnosRT(List<Turno> turnosRT) {
+        this.turnosRT = turnosRT;
+    }
+
+    public List<Turno> getTurnosRtOrdenado() {
+        return turnosRtOrdenado;
+    }
+
+    public void setTurnosRtOrdenado(List<Turno> turnosRtOrdenado) {
+        this.turnosRtOrdenado = turnosRtOrdenado;
+    }
+
+    public String getTipoNotificacion() {
+        return tipoNotificacion;
+    }
+
+    public void setTipoNotificacion(String tipoNotificacion) {
+        this.tipoNotificacion = tipoNotificacion;
+    }
+
+    public Date getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
+    }
+
+    
+    
     public PantRegIngMant getForm() {
         return form;
     }
@@ -30,7 +126,8 @@ public class GestorRegIngMant {
     }
     
     public void nuevoIngMantCorre(){
-        //to-do
+        //invocar buscarrtuslog
+//to-do
     }
     
     /*public  Usuario buscarRtUsLog(){
@@ -38,20 +135,29 @@ public class GestorRegIngMant {
     }
 */
     public void buscarRtUsLog(){
+        //buscar las sesiones
+        //buscar la activa
+        //tomarle el usuario
         this.usuarioLog=this.activaSesion.buscarUsuario();
+        //invocar obtenerPersDeUSU
     }
 
     public PersonalCientifico obtenerPersDeUsu(){
+        //buscarUsuarios
+        //compararsu usuario con el nombre del usuario logueado
         return new PersonalCientifico();//to-do
+        //invocar buscarRtEnEstadoDisponible
     }
     
     public List<RecursoTecnologico> buscarRtEnEstadoDisponible() {
+        //invocar al usuario logueado el metodo buscarRTenestadodisponible 
         return (List<RecursoTecnologico>) new RecursoTecnologico();//to-do
+        //invocar metodo ordenarportiport
     }
     
     public List<RecursoTecnologico> ordenarPorTipoRT(List<RecursoTecnologico> recursosTecnologicosDisponibles){
-        //to-do
-        
+        //ordenarlosportipo rt
+        //enviar a la pantalla con el metodo mostysolselrt
         return this.recursosTecnologicosDisponiblesOrdenado;
     }
     
