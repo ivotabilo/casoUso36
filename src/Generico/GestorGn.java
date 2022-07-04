@@ -63,4 +63,12 @@ public class GestorGn extends GestorHibernate {
             .add (Restrictions.eq("habilitado",true)).add (Restrictions.eq("nombre",cadena)) ;
         return !crit.list().isEmpty();
     }
+    
+    
+    public Object traerToken(Class clase,String cadena){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add(Restrictions.eq("nombre", cadena));  
+        return crit.list().get(0);
+    }
+    
 }

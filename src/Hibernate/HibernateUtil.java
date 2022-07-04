@@ -24,7 +24,7 @@ public class HibernateUtil  {
             //nombre de usuario de la db
             conf.setProperty("hibernate.connection.username","postgres");
             //contraseña
-            conf.setProperty("hibernate.connection.password","00");
+            conf.setProperty("hibernate.connection.password","7322");
             //cantidad de conecciones
             conf.setProperty("hibernate.connection.pool_size","10");
             //politica de creaccion de la base de datos
@@ -49,7 +49,7 @@ public class HibernateUtil  {
             conf.addAnnotatedClass(Model.AsignacionCientificoDelCI.class);
             conf.addAnnotatedClass(Model.CambioEstadoRT.class);
             conf.addAnnotatedClass(Model.Modelo.class);
-            
+            conf.addAnnotatedClass(Generico.Token.class);
             
             
             try {

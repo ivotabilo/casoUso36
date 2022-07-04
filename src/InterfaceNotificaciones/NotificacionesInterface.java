@@ -12,7 +12,7 @@ public interface NotificacionesInterface {
     
     public void notificacionWhatsapp(String numeroPhone, String mensaje);
 
-    public void notificacionMail(String mail, String mensaje);
+    public void notificacionMail(String emailDestino, String mensaje);
 
 }
 
