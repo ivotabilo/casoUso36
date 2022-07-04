@@ -115,8 +115,6 @@ public class GestorRegIngMant {
         this.fechaActual = fechaActual;
     }
 
-    
-    
     public PantRegIngMant getForm() {
         return form;
     }
@@ -130,10 +128,6 @@ public class GestorRegIngMant {
 //to-do
     }
     
-    /*public  Usuario buscarRtUsLog(){
-        return new Usuario();//to-do  // no es public void buscarRTusLog??
-    }
-*/
     public void buscarRtUsLog(){
         //buscar las sesiones
         //buscar la activa
@@ -163,6 +157,8 @@ public class GestorRegIngMant {
     
     public void tomarSelRt(RecursoTecnologico recursoTecnologico){
         this.SelRt=recursoTecnologico;
+        //llamar a solicitar fecha fin de pantalla
+        //llamar a solicitar razon de pantalla
     }
     
     public void tomarIngFecFin(Date ingFecFin){
@@ -171,40 +167,54 @@ public class GestorRegIngMant {
     
     public void tomarIngRazMant(String ingRazMant){
         this.IngRazMant=ingRazMant;
+        //llamar buscar turnos rt
     }
     
     public List<Turno> buscarTurnosRT(){
+        //llamar a buscar turnos confpend
         return (List<Turno>) new Turno();//to-do
+        //llamar a ordenar turnos por cientifico
     }
     
     public List<Turno> ordenarTurnosPorCientifico(List<Turno> turnosRT){
         //to-do
         
         return this.turnosRtOrdenado;
+        //llamar a pantalla solicitar confirmacion
     }
     
     public void tomarConfirmacion(){
         //to-do
+        //llamar a solformaNotificacion en pantalla
     }
     
     public void tomarSelFormaNotificacion(String tipoNotificacion){
-        this.tipoNotificacion=tipoNotificacion;  
+        this.tipoNotificacion=tipoNotificacion;
+        //llamar a buscarestado cancelado por mant corr
     }
     
     public Estado buscarEstadoCanceladoPorMantCorr(){
         return new Estado();//to-do
+        //implementar
+        //llamar a buscar estado con ingmantcorrectivo
     }
     
     public Estado buscarEstadoConIngMantCorrectivo(){
         return new Estado();//to-do
+        //implementar
+        //llamar a getFechaHoraActual
     }
     
     public Date getFechaHoraActual(){
         return new Date(); //to-do
+        //implementar
+        //llamar a crear mantenimiento
     }
     
     public void crearMantenimiento(){
         //to-do
+        //implementar
+        //+ notificar
     }
     
     public void open() {
