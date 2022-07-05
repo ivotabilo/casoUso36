@@ -13,9 +13,18 @@ import Model.RecursoTecnologico;
 public class SoporteRT /*implements Comparable<SoporteRT>*/{
     
     private RecursoTecnologico rt;
+    private Integer idRt;
     private String tipoRT;
     private String marca;
     private String modelo;
+
+    public Integer getIdRt() {
+        return idRt;
+    }
+
+    public void setIdRt(Integer idRt) {
+        this.idRt = idRt;
+    }
 
     public RecursoTecnologico getRt() {
         return rt;
@@ -49,11 +58,12 @@ public class SoporteRT /*implements Comparable<SoporteRT>*/{
         this.modelo = modelo;
     }
 
-    public SoporteRT(RecursoTecnologico rt, String tipoRT, String marca, String modelo) {
+    public SoporteRT(RecursoTecnologico rt, Integer idRt, String tipoRT, SoporteRT2 modeloMarca) {
         this.rt = rt;
+        this.idRt = idRt;
         this.tipoRT = tipoRT;
-        this.marca = marca;
-        this.modelo = modelo;
+        this.marca = modeloMarca.getMarca();
+        this.modelo = modeloMarca.getModelo();
     }
 
     public SoporteRT() {
@@ -61,9 +71,9 @@ public class SoporteRT /*implements Comparable<SoporteRT>*/{
 
     @Override
     public String toString() {
-        return "SoporteRT{" + "rt=" + rt + ", tipoRT=" + tipoRT + ", marca=" + marca + ", modelo=" + modelo + '}';
+        return "SoporteRT{" + "rt=" + rt + ", idRt=" + idRt + ", tipoRT=" + tipoRT + ", marca=" + marca + ", modelo=" + modelo + '}';
     }
 
-    
+        
     
 }

@@ -1,5 +1,7 @@
 package Model;
 
+import Generico.SoporteRT;
+import Generico.SoporteRT2;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -171,8 +173,8 @@ public class RecursoTecnologico implements Serializable {
         return (List<Turno>) new Turno();
     }
     
-    public void miModeloYMarca(){
-        
+    public SoporteRT2 miModeloYMarca(){
+        return new SoporteRT2(this.modelo.getNombre(),this.modelo.getMarca().getNombre());
     }
     
     //devuelve un puntero de la clase actual de recurso recnologico
@@ -188,4 +190,9 @@ public class RecursoTecnologico implements Serializable {
         return this.estadoActual;
     }
     
+    public SoporteRT conocerRT(){
+        if (this.estadoActual.conocerActual().esDisponible()){
+            return new SoporteRT(this,this.ID,this.tipoRT.getNombre(),miModeloYMarca());
+        }
+    }
 }

@@ -6,25 +6,31 @@ package InterfaceNotificaciones;
 
 import Generico.GestorGn;
 import Generico.Token;
-import com.twilio.Twilio;
-import com.twilio.rest.api.v2010.account.Message; 
+//gmail
 import java.util.Properties;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
+//whatsapp
+import com.twilio.Twilio; 
+import com.twilio.converter.Promoter; 
+import com.twilio.rest.api.v2010.account.Message; 
+import com.twilio.type.PhoneNumber; 
+ 
+import java.net.URI; 
+import java.math.BigDecimal;
 /**
  *
  * @author sebac
  */
-public class Notificaciones extends GestorGn implements NotificacionesInterface {
+public class Notificaciones extends GestorGn /*implements NotificacionesInterface*/ {
     public final String ACCOUNT_SID = "ACc913ba7931b461bac444f3725dfb6fe7"; 
     public final String AUTH_TOKEN_WHATSAPP = ((Token) this.traerToken(Token.class, "whatsapp")).getToken(); 
     public final String AUTH_TOKEN_GMAIL = ((Token) this.traerToken(Token.class, "gmail")).getToken();
     // token vencido.. hacer que lo tome de data base para que no me lo den de baja de twilio
     
-    @Override
+   // @Override
     public void notificacionWhatsapp(String numeroPhone, String mensaje) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN_WHATSAPP); 
         Message message = Message.creator( 
@@ -35,11 +41,16 @@ public class Notificaciones extends GestorGn implements NotificacionesInterface 
         
  
         System.out.println(message.getSid()); 
-        System.out.println("\n");
-        
+        /*System.out.println("\n");
+        System.out.println(message.getSid().toString()); 
+        System.out.println("\n"); 
+        System.out.println(message.getMessagingServiceSid());
+        System.out.println(message.getPrice());
+        System.out.println(message.getStatus());
+        System.out.println("xx "+message.getApiVersion());*/
     }
 
-    @Override
+  //  @Override
     public void notificacionMail(String emailDestino, String mensaje) {
         Properties propiedad = new Properties();
         
@@ -74,5 +85,9 @@ public class Notificaciones extends GestorGn implements NotificacionesInterface 
         }
                 
     }
+
+    public Notificaciones() {
+    }
+    
     
 }
