@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -104,20 +105,20 @@ public class RecursoTecnologico implements Serializable {
         this.modelo = modelo;
     }
 
-    /*
+    
     public Mantenimiento getMantenimiento() {
-        return mantenimiento;
+        return (Mantenimiento) mantenimiento;
     }
 
     public void setMantenimiento(Mantenimiento mantenimiento) {
-        this.mantenimiento = mantenimiento;
+        this.mantenimiento = (Set<Mantenimiento>) mantenimiento;
     }
 
-    public TipoRT getTipoRT() {
+    public TipoRecursoTecnologico getTipoRT() {
         return tipoRT;
     }
 
-    public void setTipoRT(TipoRT tipoRT) {
+    public void setTipoRT(TipoRecursoTecnologico tipoRT) {
         this.tipoRT = tipoRT;
     }
 
@@ -130,21 +131,21 @@ public class RecursoTecnologico implements Serializable {
     }
 
     public ArrayList<CambioEstadoRT> getCambioEstado() {
-        return cambioEstado;
+        return (ArrayList<CambioEstadoRT>) cambioEstado;
     }
 
     public void setCambioEstado(ArrayList<CambioEstadoRT> cambioEstado) {
-        this.cambioEstado = cambioEstado;
+        this.cambioEstado = (Set<CambioEstadoRT>) cambioEstado;
     }
 
     public ArrayList<Turno> getTurno() {
-        return turno;
+        return (ArrayList<Turno>) turno;
     }
 
     public void setTurno(ArrayList<Turno> turno) {
-        this.turno = turno;
+        this.turno = (Set<Turno>) turno;
     }
-    */
+    
     
     public RecursoTecnologico() {
         

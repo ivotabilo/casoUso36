@@ -35,6 +35,14 @@ public class PantRegIngMant extends ABMGn {
     
     public void habilitarPantalla(){
         //bloquear vista para seleccion de RT
+        this.btnAceptar.setEnabled(false);
+        this.btnConfirmar.setEnabled(false);
+        this.txtFecFinMant.setEnabled(false);
+        this.txtRazMant.setEnabled(false);
+        this.tbTurnos.setEnabled(false);
+        this.cbEmail.setEnabled(false);
+        this.cbWhatsApp.setEnabled(false);
+        
         this.gl.nuevoIngMantCorre();
         //to-do
     }
@@ -42,16 +50,21 @@ public class PantRegIngMant extends ABMGn {
     public void mostrarYSolSelRt(List<RecursoTecnologico> RT){
         //to-do (guardar en variable)
         //mostrar los recursos en pantall
+        this.recursosTecnologicos=RT;
+        
     }
     
     public void tomarSelRt(){
+        this.RtSel = this.tbRT.getSelectedRow.get(0);
         //guardar en variable el rt seleccionado
         //enviar al gestor el rt seleccioando
+        this.gl.tomarSelRt(this.RtSel);
         //to-do (guardar en variable)
     }
     
     public void solIngFecFin(){
         //to-do (habilitar campo)
+        this.txtFecFinMant.setEnabled(true);
         //habilitar campos correspondientes
         
     }
@@ -59,6 +72,8 @@ public class PantRegIngMant extends ABMGn {
     public void solIngrRazMant(){
         //to-do (habilitar campo)
         //habilitar campos correspondientes
+        this.txtRazMant.setEnabled(true);
+        this.btnConfirmar.setEnabled(true);
     }
     
     public void tomarIngFecFin(){
@@ -110,7 +125,7 @@ public class PantRegIngMant extends ABMGn {
         btnCancelar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbTurnos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,6 +179,11 @@ public class PantRegIngMant extends ABMGn {
         lbFecFinMant.setText("Fecha fin");
 
         txtFecFinMant.setText("DD/MM/AAAA");
+        txtFecFinMant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFecFinMantActionPerformed(evt);
+            }
+        });
 
         lbRazMant.setText("Razon");
 
@@ -246,7 +266,7 @@ public class PantRegIngMant extends ABMGn {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Turnos"));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -257,7 +277,7 @@ public class PantRegIngMant extends ABMGn {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tbTurnos);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -317,13 +337,17 @@ public class PantRegIngMant extends ABMGn {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
-        // TODO add your handling code here:
+       this.tomarSelRt();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        //llamar a los metodos del gestor tomar ingfecfin y tomaringrazmant
+        this.solConfirmacion();                //llamar a los metodos del gestor tomar ingfecfin y tomaringrazmant
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void txtFecFinMantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFecFinMantActionPerformed
+        this.tomarIngFecFin();        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFecFinMantActionPerformed
 
     public static void main(String args[]) {
 
@@ -365,10 +389,10 @@ public class PantRegIngMant extends ABMGn {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbFecFinMant;
     private javax.swing.JLabel lbRazMant;
     private javax.swing.JTable tbRT;
+    private javax.swing.JTable tbTurnos;
     private javax.swing.JTextField txtFecFinMant;
     private javax.swing.JTextArea txtRazMant;
     // End of variables declaration//GEN-END:variables

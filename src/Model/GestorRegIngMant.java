@@ -1,12 +1,16 @@
  package Model;
 
+import Generico.GestorGn;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public class GestorRegIngMant {
+public class GestorRegIngMant extends GestorGn{
     private String usuarioLog;
     private Sesion activaSesion; 
     private PersonalCientifico personalCientificoDeUsu;
+    private List<PersonalCientifico> personalesCientifico;  
     private List<RecursoTecnologico> recursosTecnologicosDisponibles;
     private List<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado;
     private RecursoTecnologico SelRt;
@@ -16,6 +20,7 @@ public class GestorRegIngMant {
     private List<Turno> turnosRtOrdenado;
     private String tipoNotificacion;
     private Date fechaActual;
+    private List<Sesion> habilitarSesion;
     
     private PantRegIngMant form;
 
@@ -125,40 +130,61 @@ public class GestorRegIngMant {
     
     public void nuevoIngMantCorre(){
         //invocar buscarrtuslog
+        this.buscarRtUsLog();
 //to-do
     }
     
     public void buscarRtUsLog(){
         //buscar las sesiones
         //buscar la activa
-        //tomarle el usuario
+        this.activaSesion = (Sesion) this.buscarSesion(Sesion.class);
+        //tomarle el usuario 
         this.usuarioLog=this.activaSesion.buscarUsuario();
         //invocar obtenerPersDeUSU
+        this.obtenerPersDeUsu(usuarioLog);
     }
-
-    public PersonalCientifico obtenerPersDeUsu(){
+    
+    public void obtenerPersDeUsu(String usuarioLog){  
         //buscarUsuarios
-        //compararsu usuario con el nombre del usuario logueado
-        return new PersonalCientifico();//to-do
-        //invocar buscarRtEnEstadoDisponible
+        this.personalesCientifico = (List<PersonalCientifico>) this.traerGenerico(PersonalCientifico.class);
+        //compararsu usuario con el nombre del usuario logueado 
+        for (int i=0;i<this.personalesCientifico.size(); i++){
+           if(this.personalesCientifico.get(i).esTuUsuario(usuarioLog)!=null){
+                this.personalCientificoDeUsu=this.personalesCientifico.get(i).esTuUsuario(usuarioLog);
+           }
+        }
+        this.buscarRtEnEstadoDisponible();
+               //invocar buscarRtEnEstadoDisponible
+        
     }
     
-    public List<RecursoTecnologico> buscarRtEnEstadoDisponible() {
+    public void buscarRtEnEstadoDisponible() {
         //invocar al usuario logueado el metodo buscarRTenestadodisponible 
-        return (List<RecursoTecnologico>) new RecursoTecnologico();//to-do
+        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible();
         //invocar metodo ordenarportiport
+        this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
+        this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado );
+        this.form.mostrarYSolSelRt(recursosTecnologicosDisponiblesOrdenado);
     }
     
-    public List<RecursoTecnologico> ordenarPorTipoRT(List<RecursoTecnologico> recursosTecnologicosDisponibles){
+    public void ordenarPorTipoRT(List<RecursoTecnologico> recursosTecnologicosDisponibles){
         //ordenarlosportipo rt
         //enviar a la pantalla con el metodo mostysolselrt
-        return this.recursosTecnologicosDisponiblesOrdenado;
+        //return this.recursosTecnologicosDisponiblesOrdenado;
+        Collections.sort(recursosTecnologicosDisponibles, new Comparator<RecursoTecnologico>(){
+            public int compare(RecursoTecnologico obj1, RecursoTecnologico obj2) {
+                return obj1.getTipoRT().getNombre().compareTo(obj2.getTipoRT().getNombre());
+            }
+        });
+        
     }
     
     public void tomarSelRt(RecursoTecnologico recursoTecnologico){
         this.SelRt=recursoTecnologico;
         //llamar a solicitar fecha fin de pantalla
+        this.form.solIngFecFin();
         //llamar a solicitar razon de pantalla
+        this.form.solIngrRazMant();
     }
     
     public void tomarIngFecFin(Date ingFecFin){
@@ -221,5 +247,7 @@ public class GestorRegIngMant {
         setForm(new PantRegIngMant());
         getForm().setVisible(true); 
     }
+
+    
     
 }

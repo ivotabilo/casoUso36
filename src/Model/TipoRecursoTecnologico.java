@@ -35,5 +35,10 @@ public class TipoRecursoTecnologico implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
+   
+    public int compareTo(Object o) {
+        TipoRecursoTecnologico p=(TipoRecursoTecnologico) o;
+        return this.getNombre().compareTo(p.getNombre());
+    }
 }
