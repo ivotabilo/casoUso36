@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 /**
  *
  * @author el negro
@@ -26,10 +27,23 @@ public class CambioEstadoRT implements Serializable{
     @SequenceGenerator(name = "CambioEstadoRT_id_seq", sequenceName = "CambioEstadoRT_id_seq", allocationSize = 1)
     private Integer ID;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHoraDesde;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHoraHasta;
     @ManyToOne(targetEntity = Estado.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Estado estado;
+
+    public CambioEstadoRT() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
 
     public Estado getEstado() {
         return estado;

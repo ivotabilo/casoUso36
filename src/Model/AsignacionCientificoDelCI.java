@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 @Entity
 public class AsignacionCientificoDelCI implements Serializable{
     
@@ -20,14 +21,34 @@ public class AsignacionCientificoDelCI implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AsignacionCientificoDelCI_id_seq")
     @SequenceGenerator(name = "AsignacionCientificoDelCI_id_seq", sequenceName = "AsignacionCientificoDelCI_id_seq", allocationSize = 1)
     private Integer ID;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDesde;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHasta;
     @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<Turno> turnos = new HashSet();
     @OneToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private PersonalCientifico personalCientifico;
+
+    public AsignacionCientificoDelCI() {
+    }
     
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Set<Turno> getTurnos() {
+        return turnos;
+    }
+
     //mostrarCientifico
+    public void setTurnos(Set<Turno> turnos) {
+        this.turnos = turnos;
+    }
 
     public Date getFechaDesde() {
         return fechaDesde;

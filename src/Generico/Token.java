@@ -4,6 +4,7 @@
  */
 package Generico;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import javax.persistence.SequenceGenerator;
  * @author sebac
  */
 @Entity
-public class Token {
+public class Token implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Token_id_seq")

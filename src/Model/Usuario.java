@@ -21,6 +21,18 @@ public class Usuario implements Serializable {
     @Column(name = "habilitado", columnDefinition = "Boolean default 'true'")
     private boolean habilitado;
 
+    public Usuario(){
+        
+    }
+    
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+    
     public String getNombre() {
         return nombre;
     }

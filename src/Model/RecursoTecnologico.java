@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 
 @Entity
 public class RecursoTecnologico implements Serializable {
@@ -30,6 +31,7 @@ public class RecursoTecnologico implements Serializable {
     
     @Column(name="nro", columnDefinition="Integer default '0'")
     private int nro;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaAlta;
     @Column(columnDefinition = "TEXT")
     private String imagen;
@@ -153,6 +155,7 @@ public class RecursoTecnologico implements Serializable {
     public RecursoTecnologico() {
         
     }
+    
     public RecursoTecnologico(Integer ID, int nro, Date fechaAlta, String imagen, int periodicidadMantPreventivo, int duracionMantPreventivo, int fraccionHorariosTurnos, Modelo modelo, Mantenimiento mantenimiento, TipoRecursoTecnologico tipoRT, CambioEstadoRT estadoActual, Set<CambioEstadoRT> cambioEstado, Set<Turno> turno) {
         this.ID = ID;
         this.nro = nro;

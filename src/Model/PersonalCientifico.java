@@ -41,6 +41,25 @@ public class PersonalCientifico implements Serializable {
     private Usuario usuario;
     @OneToMany(targetEntity = AsignacionResponsableTecnicoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<AsignacionResponsableTecnicoRT> asigRespTecnicoRt = new HashSet();
+
+    public PersonalCientifico() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Set<AsignacionResponsableTecnicoRT> getAsigRespTecnicoRt() {
+        return asigRespTecnicoRt;
+    }
+
+    public void setAsigRespTecnicoRt(Set<AsignacionResponsableTecnicoRT> asigRespTecnicoRt) {
+        this.asigRespTecnicoRt = asigRespTecnicoRt;
+    }
     
     public Usuario getUsuario() {
         return usuario;

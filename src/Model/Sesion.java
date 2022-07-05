@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 
 @Entity
 public class Sesion implements Serializable {
@@ -16,9 +18,44 @@ public class Sesion implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Sesion_id_seq")
     @SequenceGenerator(name = "Sesion_id_seq", sequenceName = "Sesion_id_seq", allocationSize = 1)
     private Integer ID;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechaInicio;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date fechafin;
     @ManyToOne(targetEntity = Usuario.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Usuario usuario;
 
+    public Sesion() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(Date fechafin) {
+        this.fechafin = fechafin;
+    }
+
+    public Sesion(Date fechaActual, Usuario usuario) {
+       this.fechaInicio=fechaActual;
+       this.usuario=usuario; 
+    }
     public Usuario getUsuario() {
         return usuario;
     }

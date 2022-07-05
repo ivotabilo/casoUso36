@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-
 public class Estado implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Estado_id_seq")
@@ -25,6 +24,17 @@ public class Estado implements Serializable{
     private boolean esReservable;
     @Column(name = "esCancelable", columnDefinition = "Boolean default 'false'")
     private boolean esCancelable;
+
+    public Estado() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
      
     public boolean esDisponible(){
         return this.nombre.equalsIgnoreCase("disponible");

@@ -193,7 +193,8 @@ public class PantLogin extends ABMGn {
                 dispose();
                 GestorMenu gm = new GestorMenu();
                 gm.open();
-                //crear session
+                
+                this.gl.crearSesion(this.gl.traerUsuario());
                
             }else{
                 JOptionPane.showMessageDialog(this, "Datos ingresados no corresponden a ningun usuario, Intente de nuevo");

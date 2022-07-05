@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 @Entity
 public class Mantenimiento implements Serializable {
     @Id
@@ -15,11 +16,17 @@ public class Mantenimiento implements Serializable {
     @SequenceGenerator(name = "Mantenimiento_id_seq", sequenceName = "Mantenimiento_id_seq", allocationSize = 1)
     private Integer ID;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fefhaFin;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaInicio;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaInicioPrevista;
     @Column(columnDefinition = "TEXT")
     private String motivoMantenimiento;
+
+    public Mantenimiento() {
+    }
 
     public Mantenimiento(Date fefhaFin, Date fechaInicio, String motivoMantenimiento) {
         this.fefhaFin = fefhaFin;
@@ -27,8 +34,12 @@ public class Mantenimiento implements Serializable {
         this.motivoMantenimiento = motivoMantenimiento;
     }
 
-    Mantenimiento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public Date getFefhaFin() {

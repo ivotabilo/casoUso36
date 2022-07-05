@@ -166,7 +166,7 @@ public class GestorRegIngMant extends GestorGn{
     
     public void buscarRtEnEstadoDisponible() {
         //invocar al usuario logueado el metodo buscarRTenestadodisponible 
-        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible();
+        //this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible();
         //invocar metodo ordenarportiport
         this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
         this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado );
@@ -216,6 +216,7 @@ public class GestorRegIngMant extends GestorGn{
         //to-do
         
         Collections.sort(turnosRtOrdenado, new Comparator<Turno>(){
+            @Override
             public int compare(Turno obj1, Turno obj2) {
                 return obj1.getAsignacion().getPc().getNombre().compareTo(obj2.getAsignacion().getPc().getNombre());
             }
@@ -276,9 +277,9 @@ public class GestorRegIngMant extends GestorGn{
         this.SelRt.conocerCambioEstadoActual();
         Mantenimiento m =new Mantenimiento();
         this.guardarObjeto(m);
-        if(tipoNotificacion=="Email"){
+        if("Email".equals(tipoNotificacion)){
             this.notificacion.notificacionMail(IngRazMant, IngRazMant);
-        }else if(tipoNotificacion=="WhatsApp"){
+        }else if("WhatsApp".equals(tipoNotificacion)){
             this.notificacion.notificacionWhatsapp(usuarioLog, IngRazMant); //FALTA TERMINAR
         }
         

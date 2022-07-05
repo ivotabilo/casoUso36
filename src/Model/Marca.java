@@ -13,9 +13,10 @@ import javax.persistence.SequenceGenerator;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.Entity;
 
 
-
+@Entity
 public class Marca implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Marca_id_seq")
@@ -26,6 +27,25 @@ public class Marca implements Serializable{
     private String nombre;
     @OneToMany(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<Modelo> modelo = new HashSet();;
+
+    public Marca() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Set<Modelo> getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Set<Modelo> modelo) {
+        this.modelo = modelo;
+    }
     
     public String getNombre() {
         return nombre;

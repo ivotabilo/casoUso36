@@ -20,6 +20,17 @@ public class TipoRecursoTecnologico implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String descripcion;
 
+    public TipoRecursoTecnologico() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
     public String getNombre() {
         return nombre;
     }

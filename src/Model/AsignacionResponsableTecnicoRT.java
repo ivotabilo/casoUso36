@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 
 @Entity
 public class AsignacionResponsableTecnicoRT implements Serializable {
@@ -23,12 +24,33 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
     @SequenceGenerator(name = "AsignacionResponsableTecnico_id_seq", sequenceName = "AsignacionResponsableTecnico_id_seq", allocationSize = 1)
     private Integer ID;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDesde;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHasta;
     @ManyToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private PersonalCientifico pc;
     @ManyToMany(targetEntity = RecursoTecnologico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<RecursoTecnologico> recursoTecnologico = new HashSet();
+
+    public AsignacionResponsableTecnicoRT() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Set<RecursoTecnologico> getRecursoTecnologico() {
+        return recursoTecnologico;
+    }
+
+    public void setRecursoTecnologico(Set<RecursoTecnologico> recursoTecnologico) {
+        this.recursoTecnologico = recursoTecnologico;
+    }
 
 
     public Date getFechaDesde() {

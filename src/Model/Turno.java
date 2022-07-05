@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Temporal;
 
 @Entity
 public class Turno implements Serializable {
@@ -21,17 +22,39 @@ public class Turno implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Turno_id_seq")
     @SequenceGenerator(name = "Turno_id_seq", sequenceName = "Turno_id_seq", allocationSize = 1)
     private Integer ID;
-    
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaGeneracion;
     @Column(columnDefinition = "TEXT")
     private String diaSemana;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHoraInicio;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHoraFin;
     @OneToOne(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private CambioEstadoTurno actual;
     @OneToMany(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<CambioEstadoTurno> cambioEstado = new HashSet();
+    @OneToOne(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private AsignacionResponsableTecnicoRT asignacion;
+
+    public Turno() {
+    }
+
+    public Integer getID() {
+        return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
+    }
+
+    public Set<CambioEstadoTurno> getCambioEstado() {
+        return cambioEstado;
+    }
+
+    public void setCambioEstado(Set<CambioEstadoTurno> cambioEstado) {
+        this.cambioEstado = cambioEstado;
+    }
     
     
     
