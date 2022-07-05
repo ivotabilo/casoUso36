@@ -27,6 +27,10 @@ public class Mantenimiento implements Serializable {
         this.motivoMantenimiento = motivoMantenimiento;
     }
 
+    Mantenimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Date getFefhaFin() {
         return fefhaFin;
     }

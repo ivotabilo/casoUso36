@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -166,7 +167,9 @@ public class RecursoTecnologico implements Serializable {
         this.turno = turno;
     }
     
-    //buscarTurnosPendientes
+    public List<Turno> buscarTurnosPendientes(){
+        return (List<Turno>) new Turno();
+    }
     
     public void miModeloYMarca(){
         

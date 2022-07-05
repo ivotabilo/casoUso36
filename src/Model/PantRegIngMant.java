@@ -11,7 +11,7 @@ public class PantRegIngMant extends ABMGn {
     private List<RecursoTecnologico> recursosTecnologicos;
     private RecursoTecnologico RtSel;
     private Date IngFecFin;
-    private Date IngRazMant;
+    private String IngRazMant;
     private String tipoNotificacion;
 
     public GestorRegIngMant getGestorLogin() {
@@ -42,6 +42,7 @@ public class PantRegIngMant extends ABMGn {
         this.tbTurnos.setEnabled(false);
         this.cbEmail.setEnabled(false);
         this.cbWhatsApp.setEnabled(false);
+        this.btnConfirmarTurno.setEnabled(false);
         
         this.gl.nuevoIngMantCorre();
         //to-do
@@ -55,7 +56,7 @@ public class PantRegIngMant extends ABMGn {
     }
     
     public void tomarSelRt(){
-        this.RtSel = this.tbRT.getSelectedRow.get(0);
+        this.RtSel = (RecursoTecnologico) this.tbRT.getValueAt(tbRT.getSelectedRow(),0);
         //guardar en variable el rt seleccionado
         //enviar al gestor el rt seleccioando
         this.gl.tomarSelRt(this.RtSel);
@@ -79,27 +80,42 @@ public class PantRegIngMant extends ABMGn {
     public void tomarIngFecFin(){
         //to-do (guardar en variable)
         //guardar fecha en variable
+        this.IngFecFin= this.txtFecFinMant.getText();
     }
     
     public void tomarIngRazMant(){
         //to-do (guardar en variable)
+        this.IngRazMant= this.txtRazMant.getText();
+        
     }
     
-    public void solConfirmacion(){
+    public void solConfirmacion(List<Turno> turnosMostrar){
+        
+        this.btnConfirmarTurno.setEnabled(true);
         //to-do (habilitar campo)
         //habilitar pantalla correspondiente
         //mostrar turnos
+        
     }
     
     public void solFormaNotificacion(){
         //to-do (habilitar campo)
         //habilitar campos correspondientes
+        
+        this.cbEmail.setEnabled(true);
+        this.cbWhatsApp.setEnabled(true);
+        
     }
     
     public void tomarSelFormaNotificacion(){
-        //to-do (guardar en variable)
+      if (this.cbEmail.isSelected()== true){
+        this.tipoNotificacion="Email"; //to-do (guardar en variable)
         //guardar en variable el tipo de notificacion seleccionado
         //llamar al gestor tomarselformanotificacion
+       }else{
+          this.tipoNotificacion="WhatsApp";
+      }
+      this.gl.tomarSelFormaNotificacion(tipoNotificacion);
     }
 
 
@@ -126,6 +142,7 @@ public class PantRegIngMant extends ABMGn {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tbTurnos = new javax.swing.JTable();
+        btnConfirmarTurno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -261,6 +278,11 @@ public class PantRegIngMant extends ABMGn {
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
 
@@ -295,6 +317,13 @@ public class PantRegIngMant extends ABMGn {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        btnConfirmarTurno.setText("Confirmar");
+        btnConfirmarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarTurnoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -308,10 +337,11 @@ public class PantRegIngMant extends ABMGn {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAceptar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(btnAceptar, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConfirmarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -325,7 +355,9 @@ public class PantRegIngMant extends ABMGn {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(115, 115, 115)
+                        .addGap(88, 88, 88)
+                        .addComponent(btnConfirmarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancelar))
@@ -341,13 +373,24 @@ public class PantRegIngMant extends ABMGn {
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        this.solConfirmacion();                //llamar a los metodos del gestor tomar ingfecfin y tomaringrazmant
+        this.tomarIngFecFin();
+        this.tomarIngRazMant();
+        this.gl.tomarIngFecFin(IngFecFin);
+        this.gl.tomarIngRazMant(IngRazMant);              //llamar a los metodos del gestor tomar ingfecfin y tomaringrazmant
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void txtFecFinMantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFecFinMantActionPerformed
         this.tomarIngFecFin();        // TODO add your handling code here:
     }//GEN-LAST:event_txtFecFinMantActionPerformed
+
+    private void btnConfirmarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarTurnoActionPerformed
+        this.gl.tomarConfirmacion();
+    }//GEN-LAST:event_btnConfirmarTurnoActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        this.tomarSelFormaNotificacion();                // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     public static void main(String args[]) {
 
@@ -379,6 +422,7 @@ public class PantRegIngMant extends ABMGn {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnConfirmarTurno;
     private javax.swing.JButton btnSeleccionar;
     private javax.swing.JCheckBox cbEmail;
     private javax.swing.JCheckBox cbWhatsApp;
@@ -396,4 +440,6 @@ public class PantRegIngMant extends ABMGn {
     private javax.swing.JTextField txtFecFinMant;
     private javax.swing.JTextArea txtRazMant;
     // End of variables declaration//GEN-END:variables
+
+    
 }

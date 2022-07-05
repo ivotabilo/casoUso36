@@ -1,6 +1,8 @@
  package Model;
 
 import Generico.GestorGn;
+import InterfaceNotificaciones.Notificaciones;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -21,7 +23,11 @@ public class GestorRegIngMant extends GestorGn{
     private String tipoNotificacion;
     private Date fechaActual;
     private List<Sesion> habilitarSesion;
-    
+    private List<Estado> estados;
+    private Estado estadosTurnos;
+    private Estado estadosRT;
+    private Notificaciones notificacion;
+            
     private PantRegIngMant form;
 
     public String getUsuarioLog() {
@@ -194,45 +200,71 @@ public class GestorRegIngMant extends GestorGn{
     public void tomarIngRazMant(String ingRazMant){
         this.IngRazMant=ingRazMant;
         //llamar buscar turnos rt
+        this.buscarTurnosRT();
     }
     
-    public List<Turno> buscarTurnosRT(){
+    public void buscarTurnosRT(){
         //llamar a buscar turnos confpend
-        return (List<Turno>) new Turno();//to-do
         //llamar a ordenar turnos por cientifico
+       this.turnosRT = this.SelRt.buscarTurnosPendientes();
+       this.turnosRtOrdenado = this.turnosRT;
+       this.ordenarTurnosPorCientifico(turnosRtOrdenado);
+       this.form.solConfirmacion(this.turnosRtOrdenado);
     }
     
-    public List<Turno> ordenarTurnosPorCientifico(List<Turno> turnosRT){
+    public void ordenarTurnosPorCientifico(List<Turno> turnosRtOrdenado){
         //to-do
         
-        return this.turnosRtOrdenado;
+        Collections.sort(turnosRtOrdenado, new Comparator<Turno>(){
+            public int compare(Turno obj1, Turno obj2) {
+                return obj1.getAsignacion().getPc().getNombre().compareTo(obj2.getAsignacion().getPc().getNombre());
+            }
+        });
+        
         //llamar a pantalla solicitar confirmacion
     }
     
     public void tomarConfirmacion(){
         //to-do
         //llamar a solformaNotificacion en pantalla
+        this.form.solFormaNotificacion();
     }
     
     public void tomarSelFormaNotificacion(String tipoNotificacion){
         this.tipoNotificacion=tipoNotificacion;
         //llamar a buscarestado cancelado por mant corr
+        this.buscarEstadoCanceladoPorMantCorr();
+       
     }
     
-    public Estado buscarEstadoCanceladoPorMantCorr(){
-        return new Estado();//to-do
+    public void buscarEstadoCanceladoPorMantCorr(){
+        this.estados=(List<Estado>) this.traerGenerico(Estado.class);
+        for(int i=0;i<this.estados.size();i++){
+           if(this.estados.get(i).esAmbitoTurno()&& this.estados.get(i).esCanceladoPorMantenimientoCorrectivo() ){
+                 this.estadosTurnos=this.estados.get(i);
+           }
+        }
+          
+         this.buscarEstadoConIngMantCorrectivo();
         //implementar
         //llamar a buscar estado con ingmantcorrectivo
     }
     
-    public Estado buscarEstadoConIngMantCorrectivo(){
-        return new Estado();//to-do
+    public void buscarEstadoConIngMantCorrectivo(){
+       this.estados=(List<Estado>) this.traerGenerico(Estado.class);
+        for(int i=0;i<this.estados.size();i++){
+           if(this.estados.get(i).esAmbitoRT()&& this.estados.get(i).esConIngresoAMantenimientoCorrectivo() ){
+                 this.estadosRT=this.estados.get(i);
+           }
+        }
         //implementar
         //llamar a getFechaHoraActual
+        this.getFechaHoraActual();
     }
     
-    public Date getFechaHoraActual(){
-        return new Date(); //to-do
+    public void getFechaHoraActual(){
+        LocalDateTime.now();
+        this.crearMantenimiento();
         //implementar
         //llamar a crear mantenimiento
     }
@@ -241,6 +273,15 @@ public class GestorRegIngMant extends GestorGn{
         //to-do
         //implementar
         //+ notificar
+        this.SelRt.conocerCambioEstadoActual();
+        Mantenimiento m =new Mantenimiento();
+        this.guardarObjeto(m);
+        if(tipoNotificacion=="Email"){
+            this.notificacion.notificacionMail(IngRazMant, IngRazMant);
+        }else if(tipoNotificacion=="WhatsApp"){
+            this.notificacion.notificacionWhatsapp(usuarioLog, IngRazMant); //FALTA TERMINAR
+        }
+        
     }
     
     public void open() {

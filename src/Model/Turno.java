@@ -31,6 +31,17 @@ public class Turno implements Serializable {
     private CambioEstadoTurno actual;
     @OneToMany(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<CambioEstadoTurno> cambioEstado = new HashSet();
+    private AsignacionResponsableTecnicoRT asignacion;
+    
+    
+    
+    public AsignacionResponsableTecnicoRT getAsignacion() {
+        return asignacion;
+    }
+
+    public void setAsignacion(AsignacionResponsableTecnicoRT asignacion) {
+        this.asignacion = asignacion;
+    }
     
     /*
     esRangoFecha

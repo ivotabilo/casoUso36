@@ -35,7 +35,7 @@ public class Estado implements Serializable{
     public boolean esPendienteConf(){
         return this.nombre.equalsIgnoreCase("pendiente confirmacion");
     }
-    public boolean esAambitoTurno (){
+    public boolean esAmbitoTurno (){
         return this.ambito.equalsIgnoreCase("turno");
     }
     public boolean esAmbitoRT(){
