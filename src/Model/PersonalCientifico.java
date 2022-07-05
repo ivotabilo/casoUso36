@@ -1,5 +1,6 @@
 package Model;
         
+import Generico.SoporteRT;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -113,25 +114,24 @@ public class PersonalCientifico implements Serializable {
     } 
 
    
-    public ArrayList<RecursoTecnologico> burcarRTenEstadoDisponible(){
-        ArrayList<RecursoTecnologico> misRtDisponibles = new ArrayList<RecursoTecnologico>();
-        ArrayList<AsignacionResponsableTecnicoRT> asignacionesActuales = new ArrayList<AsignacionResponsableTecnicoRT>();
+    public Set<SoporteRT> burcarRTenEstadoDisponible(){
+        Set<SoporteRT> misRtDisponibles = new HashSet<RecursoTecnologico>();
+        AsignacionResponsableTecnicoRT asignacionActual = null;
         
+        //buscamos la unica asignacion
         for(AsignacionResponsableTecnicoRT asignacion:asigRespTecnicoRt){
             if(asignacion.esActual()){
-                asignacionesActuales.add(asignacion);
+                asignacionActual = asignacion;
             }
         }
         
-        for (AsignacionResponsableTecnicoRT asignacionesActuale : asignacionesActuales) {
-            ArrayList<RecursoTecnologico> recursosTecnologicos = (ArrayList<RecursoTecnologico>) asignacionesActuale.misRT();
-            for (RecursoTecnologico recursoTecnologico : recursosTecnologicos) {
-                if (recursoTecnologico.conocerCambioEstadoActual().getEstado().esDisponible()){
-                    misRtDisponibles.add(recursoTecnologico);
-                }
-            }
+        //buscamos los recursos en estado disponible
+        Set<RecursoTecnologico> recursosTecnologicos = asignacionActual.misRT();
+        for (RecursoTecnologico recursoTecnologico : recursosTecnologicos) {
+            misRtDisponibles.add(recursoTecnologico.conocerRT());
         }
-            
+        
+        
             
                 
         return misRtDisponibles;

@@ -69,8 +69,8 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
         }
         return false;
     }
-    public ArrayList<RecursoTecnologico> misRT(){
-       return (ArrayList<RecursoTecnologico>) recursoTecnologico;
+    public Set<RecursoTecnologico>  misRT(){
+       return recursoTecnologico;
         
     }
 }
