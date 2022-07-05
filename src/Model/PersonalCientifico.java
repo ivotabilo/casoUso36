@@ -115,7 +115,7 @@ public class PersonalCientifico implements Serializable {
 
    
     public Set<SoporteRT> burcarRTenEstadoDisponible(){
-        Set<SoporteRT> misRtDisponibles = new HashSet<RecursoTecnologico>();
+        Set<SoporteRT> misRtDisponibles = new HashSet<SoporteRT>();
         AsignacionResponsableTecnicoRT asignacionActual = null;
         
         //buscamos la unica asignacion

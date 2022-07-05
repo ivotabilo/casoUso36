@@ -13,16 +13,16 @@ import Model.RecursoTecnologico;
 public class SoporteRT /*implements Comparable<SoporteRT>*/{
     
     private RecursoTecnologico rt;
-    private Integer idRt;
+    private int idRt;
     private String tipoRT;
     private String marca;
     private String modelo;
 
-    public Integer getIdRt() {
+    public int getIdRt() {
         return idRt;
     }
 
-    public void setIdRt(Integer idRt) {
+    public void setIdRt(int idRt) {
         this.idRt = idRt;
     }
 

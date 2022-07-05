@@ -19,6 +19,7 @@ public class Modelo implements Serializable{
     
     @Column(columnDefinition = "TEXT")
     private String nombre;
+    
     private Marca marca;
 
     public Modelo() {
