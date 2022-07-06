@@ -3,6 +3,7 @@
 import Generico.GestorGn;
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
+import Generico.SoporteTurno;
 import InterfaceNotificaciones.Notificaciones;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -25,8 +26,8 @@ public class GestorRegIngMant extends GestorGn{
     private RecursoTecnologico SelRt;
     private Date IngFecFin;
     private String IngRazMant;
-    private List<Turno> turnosRT;
-    private List<Turno> turnosRtOrdenado;
+    private Set<SoporteTurno> turnosRT;
+    private Set<SoporteTurno> turnosRtOrdenado;
     private String tipoNotificacion;
     private Date fechaActual;
     private List<Sesion> habilitarSesion;
@@ -101,19 +102,19 @@ public class GestorRegIngMant extends GestorGn{
         this.IngRazMant = IngRazMant;
     }
 
-    public List<Turno> getTurnosRT() {
+    public Set<SoporteTurno> getTurnosRT() {
         return turnosRT;
     }
 
-    public void setTurnosRT(List<Turno> turnosRT) {
+    public void setTurnosRT(Set<SoporteTurno> turnosRT) {
         this.turnosRT = turnosRT;
     }
 
-    public List<Turno> getTurnosRtOrdenado() {
+    public Set<SoporteTurno> getTurnosRtOrdenado() {
         return turnosRtOrdenado;
     }
 
-    public void setTurnosRtOrdenado(List<Turno> turnosRtOrdenado) {
+    public void setTurnosRtOrdenado(Set<SoporteTurno> turnosRtOrdenado) {
         this.turnosRtOrdenado = turnosRtOrdenado;
     }
 
@@ -219,23 +220,29 @@ public class GestorRegIngMant extends GestorGn{
     public void buscarTurnosRT(){
         //llamar a buscar turnos confpend
         //llamar a ordenar turnos por cientifico
-       this.turnosRT = this.SelRt.buscarTurnosPendientes();
+       this.turnosRT = this.SelRt.buscarTurnosConfPend();
        this.turnosRtOrdenado = this.turnosRT;
        this.ordenarTurnosPorCientifico(turnosRtOrdenado);
        this.form.solConfirmacion(this.turnosRtOrdenado);
     }
     
-    public void ordenarTurnosPorCientifico(List<Turno> turnosRtOrdenado){
+    public void ordenarTurnosPorCientifico(Set<SoporteTurno> turnosRtOrdenado){
         //to-do
+        //ordenarlosportipo rt
+        //enviar a la pantalla con el metodo mostysolselrt
+        //return this.recursosTecnologicosDisponiblesOrdenado;
+        List<SoporteTurno> lista = new ArrayList<>(turnosRtOrdenado);
         
-        Collections.sort(turnosRtOrdenado, new Comparator<Turno>(){
-            @Override
-            public int compare(Turno obj1, Turno obj2) {
-                return obj1.getAsignacion().getPc().getNombre().compareTo(obj2.getAsignacion().getPc().getNombre());
+        //List<SoporteRT> lista = (List<SoporteRT>) recursosTecnologicosDisponibles;
+        Collections.sort(lista, new Comparator<SoporteTurno>(){
+            public int compare(SoporteTurno obj1, SoporteTurno obj2) {
+                return (obj1.getPc().getApellido()+", "+obj1.getPc().getNombre()).compareTo(obj2.getPc().getApellido()+", "+obj2.getPc().getNombre());
             }
         });
         
-        //llamar a pantalla solicitar confirmacion
+        turnosRtOrdenado.clear();
+        turnosRtOrdenado.addAll(lista);
+
     }
     
     public void tomarConfirmacion(){
@@ -315,27 +322,27 @@ public class GestorRegIngMant extends GestorGn{
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext()) {
             auxModel =(SoporteRT) it2.next();
-            Object[] fila = {auxModel,auxModel.getIdRt(),auxModel.getTipoRT(),auxModel.getMarca(),auxModel.getModelo()};
+            Object[] fila = {auxModel.getRt(),auxModel.getIdRt(),auxModel.getTipoRT(),auxModel.getMarca(),auxModel.getModelo()};
             modelTabla.addRow(fila);  
         }
         return modelTabla;
     }
     
-    public DefaultTableModel listarDatosTurno(DefaultTableModel modelTabla,Class clase,Set<SoporteRT2> list) {
-        TreeSet<SoporteRT2> lista= new TreeSet();
-        SoporteRT2 auxModel;
+    public DefaultTableModel listarDatosTurno(DefaultTableModel modelTabla,Class clase,Set<SoporteTurno> list) {
+        TreeSet<SoporteTurno> lista= new TreeSet();
+        SoporteTurno auxModel;
         Iterator it = (Iterator) list.iterator();
         while (it.hasNext()) {
-            auxModel =(SoporteRT2) it.next();
+            auxModel =(SoporteTurno) it.next();
             lista.add(auxModel);
         }
         Iterator it2 = (Iterator) lista.iterator();
         while (it2.hasNext()) {
-            auxModel =(SoporteRT2) it2.next();
-            Object[] fila = {auxModel/*,auxModel.getId(),*/};//completar
+            auxModel =(SoporteTurno) it2.next();
+            Object[] fila = {auxModel.getTurno(),auxModel.getTurno().getFechaHoraInicio(),auxModel.getPc().getApellido()+", "+auxModel.getPc().getNombre(),auxModel.getPc().getCorreoElectronicoPersonal(),auxModel.getPc().getTelCelular()};//completar
             modelTabla.addRow(fila);  
         }
         return modelTabla;
-    }
+    }  
     
 }

@@ -34,7 +34,7 @@ public class Turno implements Serializable {
     private CambioEstadoTurno actual;
     @OneToMany(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<CambioEstadoTurno> cambioEstado = new HashSet();
-    @OneToOne(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToOne(targetEntity = AsignacionResponsableTecnicoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private AsignacionResponsableTecnicoRT asignacion;
 
     public Turno() {

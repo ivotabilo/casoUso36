@@ -81,7 +81,7 @@ public class GestorGn extends GestorHibernate {
         return crit.list().get(0);
     }
     public Object buscarAsignacion(Class clase){   
-        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.eq("id", 3)); 
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.eq("id", 1)); 
         return crit.list().get(0);
      
     }

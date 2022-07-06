@@ -2,6 +2,7 @@ package Model;
 
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
+import Generico.SoporteTurno;
 import Modelos.ABMGn;
 import java.util.Date;
 import java.util.List;
@@ -70,7 +71,7 @@ public class PantRegIngMant extends ABMGn {
         traerDatosRT(modeloRT,RecursoTecnologico.class,this.tbRT,list);
     }
     
-    public void initializeTableTurno(Set<SoporteRT2> list) { 
+    public void initializeTableTurno(Set<SoporteTurno> list) { 
         modeloTurnos.addColumn("Objeto");
         modeloTurnos.addColumn("ID");
         modeloTurnos.addColumn("Fecha Hora");
@@ -86,7 +87,7 @@ public class PantRegIngMant extends ABMGn {
         tabla.setModel(modelo);
     }
     
-    public void traerDatosTurno(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteRT2> list){
+    public void traerDatosTurno(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteTurno> list){
         limpiarTabla(modelo);
         modelo = this.gl.listarDatosTurno(modelo,clase,list);
         tabla.setModel(modelo);
@@ -135,11 +136,12 @@ public class PantRegIngMant extends ABMGn {
         
     }
     
-    public void solConfirmacion(List<Turno> turnosMostrar){
+    public void solConfirmacion(Set<SoporteTurno> turnosMostrar){
         
         this.btnConfirmarTurno.setEnabled(true);
         //to-do (habilitar campo)
         //habilitar pantalla correspondiente
+        initializeTableTurno(turnosMostrar);
         //mostrar turnos
         
     }

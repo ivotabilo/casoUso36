@@ -53,7 +53,7 @@ public class RecursoTecnologico implements Serializable {
     @OneToMany(targetEntity = CambioEstadoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<CambioEstadoRT> cambioEstado = new HashSet();
     @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private List<Turno> turno = new ArrayList();
+    private List<Turno> turno ;
     
     public int getNro() {
         return nro;
@@ -174,15 +174,16 @@ public class RecursoTecnologico implements Serializable {
     }
     
     public Set<SoporteTurno> buscarTurnosConfPend(){
-        
+        Set<SoporteTurno> turnos = new HashSet<SoporteTurno>(); 
         for (int i=0;i<this.turno.size();i++){
             if(this.turno.get(i).esRangoFecha()){
                 if(this.turno.get(i).conocerEstadoActual()){
-                    this.turno.get(i).getAsignacion().mostrarCientifico();
+                    SoporteTurno soporte= new SoporteTurno(this.turno.get(i),this.turno.get(i).getAsignacion().mostrarCientifico());
+                    turnos.add(soporte);
                 }
             }
         }
-        return null;
+        return turnos;
     }
     
     public SoporteRT2 miModeloYMarca(){
