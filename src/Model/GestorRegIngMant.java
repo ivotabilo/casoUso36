@@ -183,11 +183,17 @@ public class GestorRegIngMant extends GestorGn{
         //ordenarlosportipo rt
         //enviar a la pantalla con el metodo mostysolselrt
         //return this.recursosTecnologicosDisponiblesOrdenado;
-        recursosTecnologicosDisponibles.stream().sorted(new Comparator<SoporteRT>(){
+        
+        
+        List<SoporteRT> lista = (List<SoporteRT>) recursosTecnologicosDisponibles;
+        Collections.sort(lista, new Comparator<SoporteRT>(){
             public int compare(SoporteRT obj1, SoporteRT obj2) {
                 return obj1.getTipoRT().compareTo(obj2.getTipoRT());
             }
         });
+        
+        recursosTecnologicosDisponibles.clear();
+        recursosTecnologicosDisponibles.addAll(lista);
         
     }
     
