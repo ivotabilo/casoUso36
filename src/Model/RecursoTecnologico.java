@@ -193,13 +193,21 @@ public class RecursoTecnologico implements Serializable {
         return this.estadoActual;
     }
     
-    public SoporteRT conocerRT(){
+    public RecursoTecnologico conocerRT(){
         Boolean esdisponible = this.estadoActual.conocerActual().esDisponible();
         if (esdisponible!=null && esdisponible){
-            SoporteRT soporte = new SoporteRT(this,this.getNro(),this.tipoRT.getNombre(),miModeloYMarca());
-            return soporte;
+            RecursoTecnologico rt = new RecursoTecnologico();
+            return rt;
         } else {
             return null;
         }
     }
+
+    @Override
+    public String toString() {
+        return this.nro+"";
+    }
+
+    
+   
 }

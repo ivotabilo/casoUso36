@@ -14,7 +14,7 @@ public class PantRegIngMant extends ABMGn {
     private String IngRazMant;
     private String tipoNotificacion;
 
-    public GestorRegIngMant getGestorLogin() {
+    public GestorRegIngMant getGestor() {
         if (gl == null) {
            synchronized (GestorRegIngMant.class) {
                 gl = new GestorRegIngMant();
@@ -24,13 +24,16 @@ public class PantRegIngMant extends ABMGn {
         return gl;
     }
     
+    public void setGestor(GestorRegIngMant g){
+        this.gl=g;
+    }
+    
     public PantRegIngMant() {
         initComponents();
     }
     
     public void opcRecIngMantCorrectivo(){
         this.habilitarPantalla();
-        //to-do
     }
     
     public void habilitarPantalla(){
@@ -43,6 +46,7 @@ public class PantRegIngMant extends ABMGn {
         this.cbEmail.setEnabled(false);
         this.cbWhatsApp.setEnabled(false);
         this.btnConfirmarTurno.setEnabled(false);
+        //bloquear paneles
         
         this.gl.nuevoIngMantCorre();
         //to-do

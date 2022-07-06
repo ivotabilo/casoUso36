@@ -1,20 +1,22 @@
  package Model;
 
 import Generico.GestorGn;
+import Generico.SoporteRT;
 import InterfaceNotificaciones.Notificaciones;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 public class GestorRegIngMant extends GestorGn{
     private String usuarioLog;
     private Sesion activaSesion; 
     private PersonalCientifico personalCientificoDeUsu;
     private List<PersonalCientifico> personalesCientifico;  
-    private List<RecursoTecnologico> recursosTecnologicosDisponibles;
-    private List<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado;
+    private Set<RecursoTecnologico> recursosTecnologicosDisponibles;
+    private Set<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado;
     private RecursoTecnologico SelRt;
     private Date IngFecFin;
     private String IngRazMant;
@@ -54,19 +56,19 @@ public class GestorRegIngMant extends GestorGn{
         this.personalCientificoDeUsu = personalCientificoDeUsu;
     }
 
-    public List<RecursoTecnologico> getRecursosTecnologicosDisponibles() {
+    public Set<RecursoTecnologico> getRecursosTecnologicosDisponibles() {
         return recursosTecnologicosDisponibles;
     }
 
-    public void setRecursosTecnologicosDisponibles(List<RecursoTecnologico> recursosTecnologicosDisponibles) {
+    public void setRecursosTecnologicosDisponibles(Set<RecursoTecnologico> recursosTecnologicosDisponibles) {
         this.recursosTecnologicosDisponibles = recursosTecnologicosDisponibles;
     }
 
-    public List<RecursoTecnologico> getRecursosTecnologicosDisponiblesOrdenado() {
+    public Set<RecursoTecnologico> getRecursosTecnologicosDisponiblesOrdenado() {
         return recursosTecnologicosDisponiblesOrdenado;
     }
 
-    public void setRecursosTecnologicosDisponiblesOrdenado(List<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado) {
+    public void setRecursosTecnologicosDisponiblesOrdenado(Set<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado) {
         this.recursosTecnologicosDisponiblesOrdenado = recursosTecnologicosDisponiblesOrdenado;
     }
 
@@ -166,19 +168,19 @@ public class GestorRegIngMant extends GestorGn{
     
     public void buscarRtEnEstadoDisponible() {
         //invocar al usuario logueado el metodo buscarRTenestadodisponible 
-        //this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible();
+        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible();
         //invocar metodo ordenarportiport
         this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
         this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado );
         this.form.mostrarYSolSelRt(recursosTecnologicosDisponiblesOrdenado);
     }
     
-    public void ordenarPorTipoRT(List<RecursoTecnologico> recursosTecnologicosDisponibles){
+    public void ordenarPorTipoRT(Set<RecursoTecnologico> recursosTecnologicosDisponibles){
         //ordenarlosportipo rt
         //enviar a la pantalla con el metodo mostysolselrt
         //return this.recursosTecnologicosDisponiblesOrdenado;
-        Collections.sort(recursosTecnologicosDisponibles, new Comparator<RecursoTecnologico>(){
-            public int compare(RecursoTecnologico obj1, RecursoTecnologico obj2) {
+        Collections.sort(recursosTecnologicosDisponibles, new Comparator<SoporteRT>(){
+            public int compare(SoporteRT obj1, SoporteRT obj2) {
                 return obj1.getTipoRT().getNombre().compareTo(obj2.getTipoRT().getNombre());
             }
         });
@@ -287,6 +289,7 @@ public class GestorRegIngMant extends GestorGn{
     
     public void open() {
         setForm(new PantRegIngMant());
+        this.getForm().setGestor(this);
         getForm().setVisible(true); 
     }
 

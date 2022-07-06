@@ -57,6 +57,13 @@ public class GestorGn extends GestorHibernate {
         return crit.list();
     }
     
+    public Object traerUsuario(Class clase,String cadena,int max){   
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id"))
+            .add (Restrictions.eq("habilitado",true)).setMaxResults(max).add(Restrictions.eq("nombre", cadena));  
+        return crit.list().get(0);
+    }
+    
+    
     public boolean buscarUsuario(Class clase,String cadena){   
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.asc("id"))
             .add (Restrictions.eq("habilitado",true)).add (Restrictions.eq("nombre",cadena)) ;
@@ -70,7 +77,7 @@ public class GestorGn extends GestorHibernate {
         return crit.list().get(0);
     }
     public Object buscarSesion(Class clase){   
-        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.eq("fechaFin", null));  
+        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.isNull("fechafin"));  
         return crit.list().get(0);
     }
 }

@@ -3,7 +3,6 @@ package Model.Login;
 import Generico.GestorGn;
 import Model.Sesion;
 import Model.Usuario;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public class GestorLogin extends GestorGn {
@@ -20,15 +19,16 @@ public class GestorLogin extends GestorGn {
     public boolean existeUsuario(){
         Usuario U;
         if(buscarUsuario(Usuario.class,this.getForm().getTxtCorreo().getText())==true){
-            U = (Usuario) traerObjeto(Usuario.class,this.getForm().getTxtCorreo().getText(),1); 
+            U = (Usuario) traerUsuario(Usuario.class,this.getForm().getTxtCorreo().getText(),1); 
             return String.valueOf(this.getForm().getTxtContraseña().getPassword()).equals(U.getContrasenia());
         }
         return false;
     }
+    
     public Usuario traerUsuario(){
         Usuario U;
         if(buscarUsuario(Usuario.class,this.getForm().getTxtCorreo().getText())==true){
-            U = (Usuario) traerObjeto(Usuario.class,this.getForm().getTxtCorreo().getText(),1); 
+            U = (Usuario) traerUsuario(Usuario.class,this.getForm().getTxtCorreo().getText(),1); 
             return U;
         }
         return null;
