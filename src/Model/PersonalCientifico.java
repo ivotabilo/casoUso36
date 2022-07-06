@@ -133,9 +133,8 @@ public class PersonalCientifico implements Serializable {
     } 
 
    
-    public Set<RecursoTecnologico> burcarRTenEstadoDisponible(){
-        Set<RecursoTecnologico> misRtDisponibles = new HashSet<RecursoTecnologico>();
-        AsignacionResponsableTecnicoRT asignacionActual = null;//buscar la asignanes
+    public Set<SoporteRT> burcarRTenEstadoDisponible(AsignacionResponsableTecnicoRT asignacionActual){
+        Set<SoporteRT> misRtDisponibles = new HashSet<SoporteRT>();
         
         //buscamos la unica asignacion
         for(AsignacionResponsableTecnicoRT asignacion:asigRespTecnicoRt){
@@ -147,11 +146,15 @@ public class PersonalCientifico implements Serializable {
         //buscamos los recursos en estado disponible
         Set<RecursoTecnologico> recursosTecnologicos = asignacionActual.misRT();
         for (RecursoTecnologico recursoTecnologico : recursosTecnologicos) {
-            misRtDisponibles.add(recursoTecnologico.conocerRT());
+            SoporteRT soporte = new SoporteRT();
+            soporte.setRt(recursoTecnologico);
+            soporte.setIdRt(recursoTecnologico.getNro());
+            soporte.setMarca(recursoTecnologico.getModelo().getMarca().getNombre());
+            soporte.setModelo(recursoTecnologico.getModelo().getNombre());
+            soporte.setTipoRT(recursoTecnologico.getTipoRT().getNombre());
+           
+            misRtDisponibles.add(soporte);
         }
-        
-        
-            
                 
         return misRtDisponibles;
     }

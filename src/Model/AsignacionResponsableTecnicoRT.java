@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,8 +25,10 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
     @SequenceGenerator(name = "AsignacionResponsableTecnico_id_seq", sequenceName = "AsignacionResponsableTecnico_id_seq", allocationSize = 1)
     private Integer ID;
     
+    @Column(name="fechadesde")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDesde;
+    @Column(name="fechahasta", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHasta;
     @ManyToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)

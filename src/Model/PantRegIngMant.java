@@ -1,14 +1,20 @@
 package Model;
 
+import Generico.SoporteRT;
+import Generico.SoporteRT2;
 import Modelos.ABMGn;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class PantRegIngMant extends ABMGn {
-
+    DefaultTableModel modeloRT = new DefaultTableModel();
+    DefaultTableModel modeloTurnos = new DefaultTableModel();
     GestorRegIngMant gl;
-    private List<RecursoTecnologico> recursosTecnologicos;
+    private Set<SoporteRT> recursosTecnologicos;
     private RecursoTecnologico RtSel;
     private Date IngFecFin;
     private String IngRazMant;
@@ -46,16 +52,53 @@ public class PantRegIngMant extends ABMGn {
         this.cbEmail.setEnabled(false);
         this.cbWhatsApp.setEnabled(false);
         this.btnConfirmarTurno.setEnabled(false);
-        //bloquear paneles
+        this.panelMant.setEnabled(false);
+        this.panelNotificaciones.setEnabled(false);
+        this.panelTurnos.setEnabled(false);
+//bloquear paneles
         
         this.gl.nuevoIngMantCorre();
         //to-do
     }
     
-    public void mostrarYSolSelRt(List<RecursoTecnologico> RT){
+    public void initializeTableRT(Set<SoporteRT> list) { 
+        modeloRT.addColumn("Objeto");
+        modeloRT.addColumn("Numero");
+        modeloRT.addColumn("Tipo RT");
+        modeloRT.addColumn("Marca");
+        modeloRT.addColumn("Modelo");
+        traerDatosRT(modeloRT,RecursoTecnologico.class,this.tbRT,list);
+    }
+    
+    public void initializeTableTurno(Set<SoporteRT2> list) { 
+        modeloTurnos.addColumn("Objeto");
+        modeloTurnos.addColumn("ID");
+        modeloTurnos.addColumn("Nombre");
+        modeloTurnos.addColumn("Descripcion");
+        modeloTurnos.addColumn("Precio");
+        modeloTurnos.addColumn("Categoria");
+        modeloTurnos.addColumn("Comercio");
+        traerDatosTurno(modeloTurnos,Turno.class,this.tbTurnos,list);
+    }
+    
+    public void traerDatosRT(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteRT> list){
+        limpiarTabla(modelo);
+        modelo = this.gl.listarDatosRT(modelo,clase,list);
+        tabla.setModel(modelo);
+    }
+    
+    public void traerDatosTurno(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteRT2> list){
+        limpiarTabla(modelo);
+        modelo = this.gl.listarDatosTurno(modelo,clase,list);
+        tabla.setModel(modelo);
+    }
+    
+    public void mostrarYSolSelRt(Set<SoporteRT> RT){
         //to-do (guardar en variable)
         //mostrar los recursos en pantall
         this.recursosTecnologicos=RT;
+        this.initializeTableRT(this.recursosTecnologicos);
+        
         
     }
     
@@ -161,13 +204,19 @@ public class PantRegIngMant extends ABMGn {
 
         tbRT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tbRT);
@@ -294,13 +343,19 @@ public class PantRegIngMant extends ABMGn {
 
         tbTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane4.setViewportView(tbTurnos);

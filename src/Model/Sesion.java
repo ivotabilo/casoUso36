@@ -67,5 +67,6 @@ public class Sesion implements Serializable {
     public String buscarUsuario(){    
         return this.usuario.getNombre(); //invoca el metodo getNombre para obtener el nombre del usuario logeado
     }
+
     
 }

@@ -2,7 +2,9 @@
 package Model.Menu;
 
 import Model.GestorRegIngMant;
+import Model.Sesion;
 import Modelos.ABMGn;
+import java.util.Date;
 
 
 public class PantMenu extends ABMGn {
@@ -96,7 +98,8 @@ public class PantMenu extends ABMGn {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();//cerrar session
+        dispose();
+        cerrarSesion();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegIngManCorrectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegIngManCorrectivoActionPerformed
@@ -147,4 +150,11 @@ public class PantMenu extends ABMGn {
     private javax.swing.JButton btnSalir;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+public void cerrarSesion(){
+    Sesion s = new Sesion();
+    s=(Sesion) this.gl.buscarSesion(Sesion.class);
+    Date fechaActual=new Date();
+    s.setFechafin(fechaActual);
+    this.gl.actualizarObjeto(s);
+}
 }

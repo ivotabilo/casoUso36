@@ -2,21 +2,25 @@
 
 import Generico.GestorGn;
 import Generico.SoporteRT;
+import Generico.SoporteRT2;
 import InterfaceNotificaciones.Notificaciones;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import javax.swing.table.DefaultTableModel;
 
 public class GestorRegIngMant extends GestorGn{
     private String usuarioLog;
     private Sesion activaSesion; 
     private PersonalCientifico personalCientificoDeUsu;
     private List<PersonalCientifico> personalesCientifico;  
-    private Set<RecursoTecnologico> recursosTecnologicosDisponibles;
-    private Set<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado;
+    private Set<SoporteRT> recursosTecnologicosDisponibles;
+    private Set<SoporteRT> recursosTecnologicosDisponiblesOrdenado;
     private RecursoTecnologico SelRt;
     private Date IngFecFin;
     private String IngRazMant;
@@ -56,19 +60,19 @@ public class GestorRegIngMant extends GestorGn{
         this.personalCientificoDeUsu = personalCientificoDeUsu;
     }
 
-    public Set<RecursoTecnologico> getRecursosTecnologicosDisponibles() {
+    public Set<SoporteRT> getRecursosTecnologicosDisponibles() {
         return recursosTecnologicosDisponibles;
     }
 
-    public void setRecursosTecnologicosDisponibles(Set<RecursoTecnologico> recursosTecnologicosDisponibles) {
+    public void setRecursosTecnologicosDisponibles(Set<SoporteRT> recursosTecnologicosDisponibles) {
         this.recursosTecnologicosDisponibles = recursosTecnologicosDisponibles;
     }
 
-    public Set<RecursoTecnologico> getRecursosTecnologicosDisponiblesOrdenado() {
+    public Set<SoporteRT> getRecursosTecnologicosDisponiblesOrdenado() {
         return recursosTecnologicosDisponiblesOrdenado;
     }
 
-    public void setRecursosTecnologicosDisponiblesOrdenado(Set<RecursoTecnologico> recursosTecnologicosDisponiblesOrdenado) {
+    public void setRecursosTecnologicosDisponiblesOrdenado(Set<SoporteRT> recursosTecnologicosDisponiblesOrdenado) {
         this.recursosTecnologicosDisponiblesOrdenado = recursosTecnologicosDisponiblesOrdenado;
     }
 
@@ -167,21 +171,21 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void buscarRtEnEstadoDisponible() {
-        //invocar al usuario logueado el metodo buscarRTenestadodisponible 
-        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible();
+        //invocar al usuario logueado el metodo buscarRTenestadodisponible
+        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible((AsignacionResponsableTecnicoRT) this.buscarAsignacion(AsignacionResponsableTecnicoRT.class));
         //invocar metodo ordenarportiport
         this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
-        this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado );
+        this.ordenarPorTipoRT((List<SoporteRT>) this.recursosTecnologicosDisponiblesOrdenado);
         this.form.mostrarYSolSelRt(recursosTecnologicosDisponiblesOrdenado);
     }
     
-    public void ordenarPorTipoRT(Set<RecursoTecnologico> recursosTecnologicosDisponibles){
+    public void ordenarPorTipoRT(List<SoporteRT> recursosTecnologicosDisponibles){
         //ordenarlosportipo rt
         //enviar a la pantalla con el metodo mostysolselrt
         //return this.recursosTecnologicosDisponiblesOrdenado;
         Collections.sort(recursosTecnologicosDisponibles, new Comparator<SoporteRT>(){
             public int compare(SoporteRT obj1, SoporteRT obj2) {
-                return obj1.getTipoRT().getNombre().compareTo(obj2.getTipoRT().getNombre());
+                return obj1.getTipoRT().compareTo(obj2.getTipoRT());
             }
         });
         
@@ -293,6 +297,38 @@ public class GestorRegIngMant extends GestorGn{
         getForm().setVisible(true); 
     }
 
+    public DefaultTableModel listarDatosRT(DefaultTableModel modelTabla,Class clase,Set<SoporteRT> list) {
+        TreeSet<SoporteRT> lista= new TreeSet();
+        SoporteRT auxModel;
+        Iterator it = (Iterator) list.iterator();
+        while (it.hasNext()) {
+            auxModel =(SoporteRT) it.next();
+            lista.add(auxModel);
+        }
+        Iterator it2 = (Iterator) lista.iterator();
+        while (it2.hasNext()) {
+            auxModel =(SoporteRT) it2.next();
+            Object[] fila = {auxModel,auxModel.getIdRt(),auxModel.getTipoRT(),auxModel.getMarca(),auxModel.getModelo()};
+            modelTabla.addRow(fila);  
+        }
+        return modelTabla;
+    }
     
+    public DefaultTableModel listarDatosTurno(DefaultTableModel modelTabla,Class clase,Set<SoporteRT2> list) {
+        TreeSet<SoporteRT2> lista= new TreeSet();
+        SoporteRT2 auxModel;
+        Iterator it = (Iterator) list.iterator();
+        while (it.hasNext()) {
+            auxModel =(SoporteRT2) it.next();
+            lista.add(auxModel);
+        }
+        Iterator it2 = (Iterator) lista.iterator();
+        while (it2.hasNext()) {
+            auxModel =(SoporteRT2) it2.next();
+            Object[] fila = {auxModel/*,auxModel.getId(),*/};//completar
+            modelTabla.addRow(fila);  
+        }
+        return modelTabla;
+    }
     
 }
