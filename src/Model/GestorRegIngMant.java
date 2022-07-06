@@ -175,15 +175,15 @@ public class GestorRegIngMant extends GestorGn{
         this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible((AsignacionResponsableTecnicoRT) this.buscarAsignacion(AsignacionResponsableTecnicoRT.class));
         //invocar metodo ordenarportiport
         this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
-        this.ordenarPorTipoRT((List<SoporteRT>) this.recursosTecnologicosDisponiblesOrdenado);
+        this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado);
         this.form.mostrarYSolSelRt(recursosTecnologicosDisponiblesOrdenado);
     }
     
-    public void ordenarPorTipoRT(List<SoporteRT> recursosTecnologicosDisponibles){
+    public void ordenarPorTipoRT(Set<SoporteRT> recursosTecnologicosDisponibles){
         //ordenarlosportipo rt
         //enviar a la pantalla con el metodo mostysolselrt
         //return this.recursosTecnologicosDisponiblesOrdenado;
-        Collections.sort(recursosTecnologicosDisponibles, new Comparator<SoporteRT>(){
+        recursosTecnologicosDisponibles.stream().sorted(new Comparator<SoporteRT>(){
             public int compare(SoporteRT obj1, SoporteRT obj2) {
                 return obj1.getTipoRT().compareTo(obj2.getTipoRT());
             }
