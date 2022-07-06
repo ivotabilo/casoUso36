@@ -266,11 +266,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Email"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbEmailActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cbWhatsApp">
           <Properties>
             <Property name="text" type="java.lang.String" value="WhatsApp"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbWhatsAppActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -63,7 +63,7 @@ public class PantRegIngMant extends ABMGn {
     }
     
     public void initializeTableRT(Set<SoporteRT> list) { 
-        modeloRT.addColumn("Objeto");
+       // modeloRT.addColumn("Objeto");
         modeloRT.addColumn("Numero");
         modeloRT.addColumn("Tipo RT");
         modeloRT.addColumn("Marca");
@@ -72,7 +72,7 @@ public class PantRegIngMant extends ABMGn {
     }
     
     public void initializeTableTurno(Set<SoporteTurno> list) { 
-        modeloTurnos.addColumn("Objeto");
+        //modeloTurnos.addColumn("Objeto");
         modeloTurnos.addColumn("ID");
         modeloTurnos.addColumn("Fecha Hora");
         modeloTurnos.addColumn("Cientifico");
@@ -307,8 +307,18 @@ public class PantRegIngMant extends ABMGn {
         panelNotificaciones.setBorder(javax.swing.BorderFactory.createTitledBorder("Notificacion"));
 
         cbEmail.setText("Email");
+        cbEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEmailActionPerformed(evt);
+            }
+        });
 
         cbWhatsApp.setText("WhatsApp");
+        cbWhatsApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbWhatsAppActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelNotificacionesLayout = new javax.swing.GroupLayout(panelNotificaciones);
         panelNotificaciones.setLayout(panelNotificacionesLayout);
@@ -452,8 +462,35 @@ public class PantRegIngMant extends ABMGn {
     }//GEN-LAST:event_btnConfirmarTurnoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        this.tomarSelFormaNotificacion();                // TODO add your handling code here:
+        this.tomarSelFormaNotificacion();  
+       // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void cbWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWhatsAppActionPerformed
+        int a=0;
+        if(this.cbWhatsApp.isSelected() && a==0){
+            this.cbEmail.setEnabled(false); 
+            a=1;
+          }else{
+            this.cbEmail.setEnabled(true);
+            a=0;
+        }
+        this.btnAceptar.setEnabled(true);
+               // TODO add your handling code here:
+    }//GEN-LAST:event_cbWhatsAppActionPerformed
+
+    private void cbEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmailActionPerformed
+        int b=0;
+        if(this.cbEmail.isSelected() && b==0){
+            this.cbWhatsApp.setEnabled(false); 
+            b=1;
+          }else{
+            this.cbWhatsApp.setEnabled(true);
+            b=0;
+        }
+        
+        this.btnAceptar.setEnabled(true);      // TODO add your handling code here:
+    }//GEN-LAST:event_cbEmailActionPerformed
 
     public static void main(String args[]) {
 
