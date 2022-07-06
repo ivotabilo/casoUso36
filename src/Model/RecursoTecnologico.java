@@ -2,6 +2,7 @@ package Model;
 
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
+import Generico.SoporteTurno;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -52,7 +53,7 @@ public class RecursoTecnologico implements Serializable {
     @OneToMany(targetEntity = CambioEstadoRT.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<CambioEstadoRT> cambioEstado = new HashSet();
     @OneToMany(targetEntity = Turno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-    private Set<Turno> turno = new HashSet();
+    private List<Turno> turno = new ArrayList();
     
     public int getNro() {
         return nro;
@@ -148,7 +149,7 @@ public class RecursoTecnologico implements Serializable {
     }
 
     public void setTurno(ArrayList<Turno> turno) {
-        this.turno = (Set<Turno>) turno;
+        this.turno = (List<Turno>) turno;
     }
     
     
@@ -156,7 +157,7 @@ public class RecursoTecnologico implements Serializable {
         
     }
     
-    public RecursoTecnologico(Integer ID, int nro, Date fechaAlta, String imagen, int periodicidadMantPreventivo, int duracionMantPreventivo, int fraccionHorariosTurnos, Modelo modelo, Mantenimiento mantenimiento, TipoRecursoTecnologico tipoRT, CambioEstadoRT estadoActual, Set<CambioEstadoRT> cambioEstado, Set<Turno> turno) {
+    public RecursoTecnologico(Integer ID, int nro, Date fechaAlta, String imagen, int periodicidadMantPreventivo, int duracionMantPreventivo, int fraccionHorariosTurnos, Modelo modelo, Mantenimiento mantenimiento, TipoRecursoTecnologico tipoRT, CambioEstadoRT estadoActual, Set<CambioEstadoRT> cambioEstado, List<Turno> turno) {
         this.ID = ID;
         this.nro = nro;
         this.fechaAlta = fechaAlta;
@@ -172,8 +173,16 @@ public class RecursoTecnologico implements Serializable {
         this.turno = turno;
     }
     
-    public List<Turno> buscarTurnosPendientes(){
-        return (List<Turno>) new Turno();
+    public Set<SoporteTurno> buscarTurnosConfPend(){
+        
+        for (int i=0;i<this.turno.size();i++){
+            if(this.turno.get(i).esRangoFecha()){
+                if(this.turno.get(i).conocerEstadoActual()){
+                    this.turno.get(i).getAsignacion().mostrarCientifico();
+                }
+            }
+        }
+        return null;
     }
     
     public SoporteRT2 miModeloYMarca(){

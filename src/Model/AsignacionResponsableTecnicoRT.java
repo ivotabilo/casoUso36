@@ -55,7 +55,15 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
         this.recursoTecnologico = recursoTecnologico;
     }
 
-
+    public PersonalCientifico mostrarCientifico(){
+        PersonalCientifico pc = new PersonalCientifico();
+        pc.setNombre(this.pc.getNombre());
+        pc.setApellido(this.pc.getApellido());
+        pc.setCorreoElectronicoPersonal(this.pc.getCorreoElectronicoPersonal());
+        pc.setTelCelular(this.pc.getTelCelular());
+        return pc;
+    }
+    
     public Date getFechaDesde() {
         return fechaDesde;
     }

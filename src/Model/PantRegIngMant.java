@@ -73,11 +73,10 @@ public class PantRegIngMant extends ABMGn {
     public void initializeTableTurno(Set<SoporteRT2> list) { 
         modeloTurnos.addColumn("Objeto");
         modeloTurnos.addColumn("ID");
-        modeloTurnos.addColumn("Nombre");
-        modeloTurnos.addColumn("Descripcion");
-        modeloTurnos.addColumn("Precio");
-        modeloTurnos.addColumn("Categoria");
-        modeloTurnos.addColumn("Comercio");
+        modeloTurnos.addColumn("Fecha Hora");
+        modeloTurnos.addColumn("Cientifico");
+        modeloTurnos.addColumn("Email");
+        modeloTurnos.addColumn("Telefono");
         traerDatosTurno(modeloTurnos,Turno.class,this.tbTurnos,list);
     }
     

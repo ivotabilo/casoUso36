@@ -10,7 +10,7 @@ import Model.RecursoTecnologico;
  *
  * @author sebac
  */
-public class SoporteRT /*implements Comparable<SoporteRT>*/{
+public class SoporteRT implements Comparable<SoporteRT>{
     
     private RecursoTecnologico rt;
     private int idRt;
@@ -72,6 +72,12 @@ public class SoporteRT /*implements Comparable<SoporteRT>*/{
     @Override
     public String toString() {
         return "SoporteRT{" + "rt=" + rt + ", idRt=" + idRt + ", tipoRT=" + tipoRT + ", marca=" + marca + ", modelo=" + modelo + '}';
+    }
+
+    @Override
+    public int compareTo(SoporteRT o) {
+        SoporteRT p=(SoporteRT) o;
+        return this.getTipoRT().compareTo(p.getTipoRT());
     }
 
         

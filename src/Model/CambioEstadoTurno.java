@@ -61,7 +61,12 @@ public class CambioEstadoTurno implements Serializable{
         this.fechaHoraHasta = fechaHoraHasta;
     }
     
-    //esConfirmado
-    //esPendienteConf
+    public boolean esConfirmado(){
+        return this.estado.esConfirmado();
+    }
+    
+    public boolean esPendienteConf(){
+        return this.estado.esPendienteConf();
+    }
     //new
 }

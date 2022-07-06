@@ -56,8 +56,6 @@ public class Turno implements Serializable {
         this.cambioEstado = cambioEstado;
     }
     
-    
-    
     public AsignacionResponsableTecnicoRT getAsignacion() {
         return asignacion;
     }
@@ -65,10 +63,22 @@ public class Turno implements Serializable {
     public void setAsignacion(AsignacionResponsableTecnicoRT asignacion) {
         this.asignacion = asignacion;
     }
+    public boolean esRangoFecha(){
+        //si esta dentro
+        return true;
+        //sino
+        //return false
+    }
+    public boolean conocerEstadoActual(){
+        if(this.actual.esConfirmado()){
+            return true;
+        }else if(this.actual.esPendienteConf()){
+            return true;
+        }
+        return false;
+    }
     
     /*
-    esRangoFecha
-    conocerEstadoActual
     crearNuevoCambioEstado
     setCambioEstadoActual
     */

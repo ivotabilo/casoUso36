@@ -5,6 +5,7 @@ import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import InterfaceNotificaciones.Notificaciones;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -183,9 +184,9 @@ public class GestorRegIngMant extends GestorGn{
         //ordenarlosportipo rt
         //enviar a la pantalla con el metodo mostysolselrt
         //return this.recursosTecnologicosDisponiblesOrdenado;
+        List<SoporteRT> lista = new ArrayList<>(recursosTecnologicosDisponibles);
         
-        
-        List<SoporteRT> lista = (List<SoporteRT>) recursosTecnologicosDisponibles;
+        //List<SoporteRT> lista = (List<SoporteRT>) recursosTecnologicosDisponibles;
         Collections.sort(lista, new Comparator<SoporteRT>(){
             public int compare(SoporteRT obj1, SoporteRT obj2) {
                 return obj1.getTipoRT().compareTo(obj2.getTipoRT());
