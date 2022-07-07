@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 @Entity
 public class Mantenimiento implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Mantenimiento_id_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "Mantenimiento_id_seq")
     @SequenceGenerator(name = "Mantenimiento_id_seq", sequenceName = "Mantenimiento_id_seq", allocationSize = 1)
     private Integer ID;
     

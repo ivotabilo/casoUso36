@@ -55,6 +55,21 @@ public class GestorHibernate extends HibernateUtil {
             return false;
         }
     }
+    public boolean actualizaroguardaObjeto(Object objeto){
+        Session s = HibernateUtil.getSession();
+        Transaction tx = s.beginTransaction();
+        try{
+            s.saveOrUpdate(objeto);
+            tx.commit();
+            System.out.println(" actualizarObjeto() " +objeto.getClass()+": "+objeto.toString());
+            return true;
+        }catch(HibernateException e){
+            JOptionPane.showMessageDialog(null, e);
+            tx.rollback();
+            JOptionPane.showMessageDialog(null, "No se pueden guardar los datos. \nLos mismos han sido modificados por otra persona.");
+            return false;
+        }
+    }
     
     public Transaction getTx() {
         return tx;

@@ -301,7 +301,19 @@ public class GestorRegIngMant extends GestorGn{
         this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
         //this.actualizarObjeto(SelRt);
         Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant);
-        this.guardarObjeto(m);
+        try{
+            //System.out.println(m.getID());
+            //this.SelRt.setMantenimiento(m);
+            this.guardarObjeto(m);
+            
+            
+        }
+        catch(Exception e){
+            System.out.println(e);
+            this.guardarObjeto(m);
+        }
+                
+        
         
         NotificacionesInterface n = new Notificaciones();
         if("Email".equals(tipoNotificacion)){

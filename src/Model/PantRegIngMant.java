@@ -356,6 +356,11 @@ public class PantRegIngMant extends ABMGn {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         panelTurnos.setBorder(javax.swing.BorderFactory.createTitledBorder("Turnos"));
 
@@ -498,6 +503,11 @@ public class PantRegIngMant extends ABMGn {
         
         this.btnAceptar.setEnabled(true);      // TODO add your handling code here:
     }//GEN-LAST:event_cbEmailActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+        //cerrar sesion
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     public static void main(String args[]) {
 

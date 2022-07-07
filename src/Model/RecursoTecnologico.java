@@ -25,7 +25,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 
 @Entity
-public class RecursoTecnologico implements Serializable {
+public class RecursoTecnologico extends implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RecursoTecnologico_id_seq")
@@ -205,6 +205,7 @@ public class RecursoTecnologico implements Serializable {
         // cerrar hora fin de estado actual rt
         this.estadoActual.setFechaHoraHasta(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))));
         //crear uno nuevo
+        
         CambioEstadoRT nuevoCambio = new CambioEstadoRT(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))),estadoNuevoRT);
         // agregar a la lista
         this.setCambioEstadoActual(nuevoCambio);
