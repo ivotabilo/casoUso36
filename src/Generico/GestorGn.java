@@ -84,9 +84,12 @@ public class GestorGn extends GestorHibernate {
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.isNull("fechafin"));  
         return crit.list().get(0);
     }
-    public Object buscarAsignacion(Class clase, Integer pc_id){   
+    public Object buscarAsignacion(Class clase, Integer pc_id){ 
+        
+        // query nativa que busca todos los id en asignacionresponsabletecnicort que tienen fecha nulla y con id personal cientif = al de la session (seria)
         SQLQuery query = session.createSQLQuery("select id from asignacionresponsabletecnicort where fechahasta is null and pc_id = "+pc_id);
         
+        // si la lista que retorna la query esta vacia (empty) no devuelvo asignacion (resolver para cuando es null (alternativa) )
         if (!query.list().isEmpty()){
             Criteria crit = getSession().createCriteria(clase).add(Restrictions.in("id",query.list())); 
             return crit.list().get(0);
