@@ -146,13 +146,14 @@ public class PersonalCientifico implements Serializable {
         //buscamos los recursos en estado disponible
         Set<RecursoTecnologico> recursosTecnologicos = asignacionActual.misRT();
         for (RecursoTecnologico recursoTecnologico : recursosTecnologicos) {
+            //se asigna los valores del recurso, de su tipo, marca y modelo a una clase auxiliar
             SoporteRT soporte = new SoporteRT();
             soporte.setRt(recursoTecnologico);
             soporte.setIdRt(recursoTecnologico.getNro());
             soporte.setMarca(recursoTecnologico.getModelo().getMarca().getNombre());
             soporte.setModelo(recursoTecnologico.getModelo().getNombre());
             soporte.setTipoRT(recursoTecnologico.getTipoRT().getNombre());
-           
+            //asignamos la clases auxiliar a la lista
             misRtDisponibles.add(soporte);
         }
                 

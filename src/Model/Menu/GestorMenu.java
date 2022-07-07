@@ -17,6 +17,7 @@ public class GestorMenu extends GestorGn {
     }
     public void open() {
         setForm(new PantMenu());
+        this.getForm().setMenu(this);
         getForm().setVisible(true); 
     }
 }

@@ -146,18 +146,17 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void nuevoIngMantCorre(){
-        //invocar buscarrtuslog
+        //busca usuario logueado
         this.buscarRtUsLog();
 //to-do
     }
     
     public void buscarRtUsLog(){
-        //buscar las sesiones
-        //buscar la activa
+        //busca la sesion activa
         this.activaSesion = (Sesion) this.buscarSesion(Sesion.class);
-        //tomarle el usuario 
+        //toma el usuario de la sesion
         this.usuarioLog=this.activaSesion.buscarUsuario();
-        //invocar obtenerPersDeUSU
+        //busca personal cientifico del usuario
         this.obtenerPersDeUsu(usuarioLog);
     }
     
@@ -170,27 +169,24 @@ public class GestorRegIngMant extends GestorGn{
                 this.personalCientificoDeUsu=this.personalesCientifico.get(i).esTuUsuario(usuarioLog);
            }
         }
+        //busca los recursos tecnologicos disponibles 
         this.buscarRtEnEstadoDisponible();
-               //invocar buscarRtEnEstadoDisponible
         
     }
     
     public void buscarRtEnEstadoDisponible() {
-        //invocar al usuario logueado el metodo buscarRTenestadodisponible
+        //busca los recursos tecnologicos disponibles  
         this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible((AsignacionResponsableTecnicoRT) this.buscarAsignacion(AsignacionResponsableTecnicoRT.class, this.personalCientificoDeUsu.getID()));
-        //invocar metodo ordenarportiport
         this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
+        //ordena los recursos por tipo de recurso
         this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado);
+        //envia los recursos ordenados a la pantalla
         this.form.mostrarYSolSelRt(recursosTecnologicosDisponiblesOrdenado);
     }
     
     public void ordenarPorTipoRT(Set<SoporteRT> recursosTecnologicosDisponibles){
-        //ordenarlosportipo rt
-        //enviar a la pantalla con el metodo mostysolselrt
-        //return this.recursosTecnologicosDisponiblesOrdenado;
         List<SoporteRT> lista = new ArrayList<>(recursosTecnologicosDisponibles);
-        
-        //List<SoporteRT> lista = (List<SoporteRT>) recursosTecnologicosDisponibles;
+        //se ordena la lista alfabeticamente con el ordenamiento burbuja
         Collections.sort(lista, new Comparator<SoporteRT>(){
             public int compare(SoporteRT obj1, SoporteRT obj2) {
                 return obj1.getTipoRT().compareTo(obj2.getTipoRT());
@@ -203,6 +199,7 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void tomarSelRt(RecursoTecnologico recursoTecnologico){
+        //se guarda el rt en el gestor
         this.SelRt=recursoTecnologico;
         //llamar a solicitar fecha fin de pantalla
         this.form.solIngFecFin();
@@ -221,8 +218,8 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void buscarTurnosRT(){
-        //llamar a buscar turnos confpend
-        //llamar a ordenar turnos por cientifico
+       //llamar a buscar turnos confpend
+       //llamar a ordenar turnos por cientifico
        this.turnosRT = this.SelRt.buscarTurnosConfPend();
        this.turnosRtOrdenado = this.turnosRT;
        this.ordenarTurnosPorCientifico(turnosRtOrdenado);
@@ -230,13 +227,9 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void ordenarTurnosPorCientifico(Set<SoporteTurno> turnosRtOrdenado){
-        //to-do
-        //ordenarlosportipo rt
-        //enviar a la pantalla con el metodo mostysolselrt
-        //return this.recursosTecnologicosDisponiblesOrdenado;
+        //ordenar por cientifico
+
         List<SoporteTurno> lista = new ArrayList<>(turnosRtOrdenado);
-        
-        //List<SoporteRT> lista = (List<SoporteRT>) recursosTecnologicosDisponibles;
         Collections.sort(lista, new Comparator<SoporteTurno>(){
             public int compare(SoporteTurno obj1, SoporteTurno obj2) {
                 return (obj1.getPc().getApellido()+", "+obj1.getPc().getNombre()).compareTo(obj2.getPc().getApellido()+", "+obj2.getPc().getNombre());
@@ -249,7 +242,6 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void tomarConfirmacion(){
-        //to-do
         //llamar a solformaNotificacion en pantalla
         this.form.solFormaNotificacion();
     }
@@ -262,6 +254,7 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void buscarEstadoCanceladoPorMantCorr(){
+        //busca estado cancelado por mantenimiento correctivo
         this.estados=(List<Estado>) this.traerGenerico(Estado.class);
         for(int i=0;i<this.estados.size();i++){
            if(this.estados.get(i).esAmbitoTurno()&& this.estados.get(i).esCanceladoPorMantenimientoCorrectivo() ){
@@ -270,43 +263,33 @@ public class GestorRegIngMant extends GestorGn{
         }
           
          this.buscarEstadoConIngMantCorrectivo();
-        //implementar
-        //llamar a buscar estado con ingmantcorrectivo
     }
     
     public void buscarEstadoConIngMantCorrectivo(){
+        //busca estado ingreso con mantenimiento correctivo
        this.estados=(List<Estado>) this.traerGenerico(Estado.class);
         for(int i=0;i<this.estados.size();i++){
            if(this.estados.get(i).esAmbitoRT()&& this.estados.get(i).esConIngresoAMantenimientoCorrectivo() ){
                  this.estadosRT=this.estados.get(i);
            }
         }
-        //implementar
-        //llamar a getFechaHoraActual
+        //toma fecha y hora actual
         this.getFechaHoraActual();
     }
     
     public void getFechaHoraActual(){
         //casteamos localdate a Date y zona horaria -3(arg)
         this.fechaActual = Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3")));
-        this.crearMantenimiento();
-        //implementar
         //llamar a crear mantenimiento
+        this.crearMantenimiento();
     }
     
     public void crearMantenimiento(){
-        //to-do
-        //implementar
-        //+ notificar
         this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
         //this.actualizarObjeto(SelRt);
         Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant,fechaActual);
         try{
-            //System.out.println(m.getID());
-            //this.SelRt.setMantenimiento(m);
             this.guardarObjeto(m);
-            
-            
         }
         catch(Exception e){
             System.out.println(e);
@@ -314,20 +297,17 @@ public class GestorRegIngMant extends GestorGn{
         }
         
         try{
-           NotificacionesInterface n = new Notificaciones();
-        if("Email".equals(tipoNotificacion)){
-            n.notificacionMail(personalCientificoDeUsu.getCorreoElectronicoPersonal(), IngRazMant);
-        }else if("WhatsApp".equals(tipoNotificacion)){
-            n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant);
-        }
-            
+            NotificacionesInterface n = new Notificaciones();
+            if("Email".equals(tipoNotificacion)){
+                n.notificacionMail(personalCientificoDeUsu.getCorreoElectronicoPersonal(), IngRazMant);
+            }else if("WhatsApp".equals(tipoNotificacion)){
+                n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant);
+            }
         }
         catch(Exception e){
             System.out.println(e);
         }  
     }
-    
-    
     
     public void open() {
         setForm(new PantRegIngMant());

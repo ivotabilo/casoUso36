@@ -24,6 +24,9 @@ public class PantMenu extends ABMGn {
         initComponents();
     }
 
+    public void setMenu(GestorMenu gm){
+        this.gl=gm;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -150,11 +153,12 @@ public class PantMenu extends ABMGn {
     private javax.swing.JButton btnSalir;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
-public void cerrarSesion(){
+
+    public void cerrarSesion(){
     Sesion s = new Sesion();
     s=(Sesion) this.gl.buscarSesion(Sesion.class);
     Date fechaActual=new Date();
     s.setFechafin(fechaActual);
     this.gl.actualizarObjeto(s);
-}
+    }
 }

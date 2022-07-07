@@ -26,7 +26,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 
 @Entity
-public class RecursoTecnologico extends GestorHibernate implements Serializable {
+public class RecursoTecnologico implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RecursoTecnologico_id_seq")

@@ -1,15 +1,11 @@
 package Model;
 
 import Generico.SoporteRT;
-import Generico.SoporteRT2;
 import Generico.SoporteTurno;
 import Model.Menu.GestorMenu;
 import Modelos.ABMGn;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -42,7 +38,7 @@ public class PantRegIngMant extends ABMGn {
     public PantRegIngMant() {
         initComponents();
     }
-    
+    //habilita pantalla
     public void opcRecIngMantCorrectivo(){
         this.habilitarPantalla();
     }
@@ -60,77 +56,73 @@ public class PantRegIngMant extends ABMGn {
         this.panelMant.setEnabled(false);
         this.panelNotificaciones.setEnabled(false);
         this.panelTurnos.setEnabled(false);
-//bloquear paneles
-        
+        //llama al gestor con un nuevo mantenimiento correctivo
         this.gl.nuevoIngMantCorre();
-        //to-do
     }
     
     public void initializeTableRT(Set<SoporteRT> list) { 
-       // modeloRT.addColumn("Objeto");
+        //se agregan las columnas correspondientes a los datos a mostrar
         modeloRT.addColumn("Numero");
         modeloRT.addColumn("Tipo RT");
         modeloRT.addColumn("Marca");
         modeloRT.addColumn("Modelo");
+        //se agregan los datos
         traerDatosRT(modeloRT,RecursoTecnologico.class,this.tbRT,list);
     }
     
     public void initializeTableTurno(Set<SoporteTurno> list) { 
-        //modeloTurnos.addColumn("Objeto");
+        //se agregan las columnas correspondientes a los datos a mostrar
         modeloTurnos.addColumn("ID");
         modeloTurnos.addColumn("Fecha Hora");
         modeloTurnos.addColumn("Cientifico");
         modeloTurnos.addColumn("Email");
         modeloTurnos.addColumn("Telefono");
+        //se agregan los datos
         traerDatosTurno(modeloTurnos,Turno.class,this.tbTurnos,list);
     }
     
     public void traerDatosRT(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteRT> list){
         limpiarTabla(modelo);
+        //se agregan los datos al modelo
         modelo = this.gl.listarDatosRT(modelo,clase,list);
-        tabla.enableInputMethods(false);
+        //se muestra el modelo en la tabla
         tabla.setModel(modelo);
     }
     
     public void traerDatosTurno(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteTurno> list){
         limpiarTabla(modelo);
+         //se agregan los datos al modelo
         modelo = this.gl.listarDatosTurno(modelo,clase,list);
+        //se muestra el modelo en la tabla
         tabla.setModel(modelo);
     }
     
     public void mostrarYSolSelRt(Set<SoporteRT> RT){
-        //to-do (guardar en variable)
-        //mostrar los recursos en pantall
+        //se guardan los datos de los recursos en la pantalla
         this.recursosTecnologicos=RT;
+        //se inicializa la pantalla con los recursos
         this.initializeTableRT(this.recursosTecnologicos);
-        
-        
     }
     
     public void tomarSelRt(){
-        this.RtSel = (RecursoTecnologico) this.tbRT.getValueAt(tbRT.getSelectedRow(),0);
         //guardar en variable el rt seleccionado
+        this.RtSel = (RecursoTecnologico) this.tbRT.getValueAt(tbRT.getSelectedRow(),0);
         //enviar al gestor el rt seleccioando
         this.gl.tomarSelRt(this.RtSel);
-        //to-do (guardar en variable)
     }
     
     public void solIngFecFin(){
-        //to-do (habilitar campo)
-        this.txtFecFinMant.setEnabled(true);
         //habilitar campos correspondientes
-        
+        this.txtFecFinMant.setEnabled(true);
     }
     
     public void solIngrRazMant(){
-        //to-do (habilitar campo)
         //habilitar campos correspondientes
         this.txtRazMant.setEnabled(true);
         this.btnConfirmar.setEnabled(true);
     }
     
     public void tomarIngFecFin() {
-        //to-do (guardar en variable)
         //guardar fecha en variable
         try {
             this.IngFecFin = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFecFinMant.getText());
@@ -141,35 +133,30 @@ public class PantRegIngMant extends ABMGn {
     }
     
     public void tomarIngRazMant(){
-        //to-do (guardar en variable)
+        //guardar razon en mantenimiento
         this.IngRazMant= this.txtRazMant.getText();
         
     }
     
     public void solConfirmacion(Set<SoporteTurno> turnosMostrar){
-        
+        //habilitar boton confirmar turno
         this.btnConfirmarTurno.setEnabled(true);
-        //to-do (habilitar campo)
-        //habilitar pantalla correspondiente
+        //inicializar tabla turno
         initializeTableTurno(turnosMostrar);
         //mostrar turnos
-        
     }
     
     public void solFormaNotificacion(){
-        //to-do (habilitar campo)
         //habilitar campos correspondientes
-        
         this.cbEmail.setEnabled(true);
         this.cbWhatsApp.setEnabled(true);
-        
     }
     
     public void tomarSelFormaNotificacion(){
-      if (this.cbEmail.isSelected()== true){
-        this.tipoNotificacion="Email"; //to-do (guardar en variable)
-        //guardar en variable el tipo de notificacion seleccionado
-        //llamar al gestor tomarselformanotificacion
+      //guardar en variable el tipo de notificacion seleccionado
+      //llamar al gestor tomarselformanotificacion
+       if (this.cbEmail.isSelected()== true){
+        this.tipoNotificacion="Email";
        }else{
           this.tipoNotificacion="WhatsApp";
       }
@@ -452,15 +439,19 @@ public class PantRegIngMant extends ABMGn {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+       //se guarda el recurso en la pantalla
        this.tomarSelRt();
        this.btnSeleccionar.setEnabled(false);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        //tomar valores fecha fin mantenimiento, razon mantenimiento
         this.tomarIngFecFin();
         this.tomarIngRazMant();
+        //enviar al gestor valores fecha fin mantenimiento, razon mantenimiento
         this.gl.tomarIngFecFin(IngFecFin);
         this.gl.tomarIngRazMant(IngRazMant);
+        //desabilitar campos
         this.btnConfirmar.setEnabled(false);
         this.txtRazMant.setEnabled(false);
         this.txtFecFinMant.setEnabled(false);
@@ -468,50 +459,51 @@ public class PantRegIngMant extends ABMGn {
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnConfirmarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarTurnoActionPerformed
+        //enviar confirmacion al gestor
         this.gl.tomarConfirmacion();
+        //desabilitar boton
         this.btnConfirmarTurno.setEnabled(false);
     }//GEN-LAST:event_btnConfirmarTurnoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        //toma tipo notificacion
         this.tomarSelFormaNotificacion();  
         dispose();
-        GestorMenu gm =new GestorMenu();
-        gm.open();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cbWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWhatsAppActionPerformed
         int a=0;
         if(this.cbWhatsApp.isSelected() && a==0){
             this.cbEmail.setEnabled(false); 
+            this.btnAceptar.setEnabled(true);
             a=1;
           }else{
             this.cbEmail.setEnabled(true);
+            this.btnAceptar.setEnabled(false);
             a=0;
         }
-        this.btnAceptar.setEnabled(true);
-               // TODO add your handling code here:
     }//GEN-LAST:event_cbWhatsAppActionPerformed
 
     private void cbEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmailActionPerformed
         int b=0;
         if(this.cbEmail.isSelected() && b==0){
             this.cbWhatsApp.setEnabled(false); 
+            this.btnAceptar.setEnabled(true);
             b=1;
           }else{
             this.cbWhatsApp.setEnabled(true);
+            this.btnAceptar.setEnabled(false);
             b=0;
         }
-        
-        this.btnAceptar.setEnabled(true);      // TODO add your handling code here:
     }//GEN-LAST:event_cbEmailActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
-        //cerrar sesion
+        //cierra la sesion
+        cerrarSesion();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     public static void main(String args[]) {
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -558,6 +550,16 @@ public class PantRegIngMant extends ABMGn {
     private javax.swing.JTextField txtFecFinMant;
     private javax.swing.JTextArea txtRazMant;
     // End of variables declaration//GEN-END:variables
-
     
+    public void cerrarSesion(){
+        //crear sesion vacia
+        Sesion s = new Sesion();
+        //buscar sesion activa
+        s=(Sesion) this.gl.buscarSesion(Sesion.class);
+        Date fechaActual=new Date();
+        //asignar fecha
+        s.setFechafin(fechaActual);
+        //guardar actualizacion
+        this.gl.actualizarObjeto(s);
+    }
 }
