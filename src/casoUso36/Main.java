@@ -6,6 +6,7 @@
 package casoUso36;
 import Model.Login.GestorLogin;
 import Hibernate.HibernateUtil;
+import InterfaceNotificaciones.Notificaciones;
 /**
  *
  * @author Juan
@@ -15,5 +16,6 @@ public class Main {
         HibernateUtil.inicializar();
         GestorLogin gl = new GestorLogin();
         gl.open();
+        
     }
 }

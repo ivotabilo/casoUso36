@@ -25,7 +25,7 @@ public class Marca implements Serializable{
     
     @Column(columnDefinition = "TEXT")
     private String nombre;
-    @OneToMany(targetEntity = CambioEstadoTurno.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToMany(targetEntity = Modelo.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     private Set<Modelo> modelo = new HashSet();;
 
     public Marca() {

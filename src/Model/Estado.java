@@ -40,8 +40,8 @@ public class Estado implements Serializable{
         return this.nombre.equalsIgnoreCase("disponible");
     }
     public boolean esConfirmado(){
-        //return this.nombre.equalsIgnoreCase("confirmado");
-        return true;
+        return (this.nombre.equalsIgnoreCase("confirmado"));
+        //return true;
     }
     public boolean esPendienteConf(){
         //return this.nombre.equalsIgnoreCase("pendiente confirmacion");

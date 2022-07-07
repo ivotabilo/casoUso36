@@ -28,7 +28,7 @@ public class AsignacionResponsableTecnicoRT implements Serializable {
     @Column(name="fechadesde")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaDesde;
-    @Column(name="fechahasta", nullable = true)
+    @Column(name="fechaHasta", nullable = true)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaHasta;
     @ManyToOne(targetEntity = PersonalCientifico.class, cascade = CascadeType.ALL,fetch=FetchType.LAZY)

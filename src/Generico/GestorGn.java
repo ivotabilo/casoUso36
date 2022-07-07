@@ -2,8 +2,12 @@ package Generico;
 
 import Hibernate.GestorHibernate;
 import static Hibernate.HibernateUtil.getSession;
+import Model.AsignacionResponsableTecnicoRT;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -80,9 +84,16 @@ public class GestorGn extends GestorHibernate {
         Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.isNull("fechafin"));  
         return crit.list().get(0);
     }
-    public Object buscarAsignacion(Class clase){   
-        Criteria crit = getSession().createCriteria(clase).addOrder(Order.desc("id")).add(Restrictions.eq("id", 1)); 
-        return crit.list().get(0);
+    public Object buscarAsignacion(Class clase, Integer pc_id){   
+        SQLQuery query = session.createSQLQuery("select id from asignacionresponsabletecnicort where fechahasta is null and pc_id = "+pc_id);
+        
+        if (!query.list().isEmpty()){
+            Criteria crit = getSession().createCriteria(clase).add(Restrictions.in("id",query.list())); 
+            return crit.list().get(0);
+        } else {
+            return null;
+        }
+       
      
     }
 }

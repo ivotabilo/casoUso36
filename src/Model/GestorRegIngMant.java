@@ -174,7 +174,7 @@ public class GestorRegIngMant extends GestorGn{
     
     public void buscarRtEnEstadoDisponible() {
         //invocar al usuario logueado el metodo buscarRTenestadodisponible
-        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible((AsignacionResponsableTecnicoRT) this.buscarAsignacion(AsignacionResponsableTecnicoRT.class));
+        this.recursosTecnologicosDisponibles = this.personalCientificoDeUsu.burcarRTenEstadoDisponible((AsignacionResponsableTecnicoRT) this.buscarAsignacion(AsignacionResponsableTecnicoRT.class, this.personalCientificoDeUsu.getID()));
         //invocar metodo ordenarportiport
         this.recursosTecnologicosDisponiblesOrdenado = this.recursosTecnologicosDisponibles;
         this.ordenarPorTipoRT(this.recursosTecnologicosDisponiblesOrdenado);
