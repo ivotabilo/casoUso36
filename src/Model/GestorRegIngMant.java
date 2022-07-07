@@ -300,7 +300,7 @@ public class GestorRegIngMant extends GestorGn{
         //+ notificar
         this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
         //this.actualizarObjeto(SelRt);
-        Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant);
+        Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant,fechaActual);
         try{
             //System.out.println(m.getID());
             //this.SelRt.setMantenimiento(m);
@@ -312,16 +312,19 @@ public class GestorRegIngMant extends GestorGn{
             System.out.println(e);
             this.guardarObjeto(m);
         }
-                
         
-        
-        NotificacionesInterface n = new Notificaciones();
+        try{
+           NotificacionesInterface n = new Notificaciones();
         if("Email".equals(tipoNotificacion)){
             n.notificacionMail(personalCientificoDeUsu.getCorreoElectronicoPersonal(), IngRazMant);
         }else if("WhatsApp".equals(tipoNotificacion)){
-            n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant); //FALTA TERMINAR
+            n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant);
         }
-        
+            
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }  
     }
     
     

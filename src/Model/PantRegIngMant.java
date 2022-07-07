@@ -3,10 +3,12 @@ package Model;
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
+import Model.Menu.GestorMenu;
 import Modelos.ABMGn;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JTable;
@@ -86,6 +88,7 @@ public class PantRegIngMant extends ABMGn {
     public void traerDatosRT(DefaultTableModel modelo,Class clase,JTable tabla,Set<SoporteRT> list){
         limpiarTabla(modelo);
         modelo = this.gl.listarDatosRT(modelo,clase,list);
+        tabla.enableInputMethods(false);
         tabla.setModel(modelo);
     }
     
@@ -257,11 +260,6 @@ public class PantRegIngMant extends ABMGn {
         lbFecFinMant.setText("Fecha fin");
 
         txtFecFinMant.setToolTipText("DD/MM/AAAA");
-        txtFecFinMant.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFecFinMantActionPerformed(evt);
-            }
-        });
 
         lbRazMant.setText("Razon");
 
@@ -455,27 +453,30 @@ public class PantRegIngMant extends ABMGn {
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
        this.tomarSelRt();
+       this.btnSeleccionar.setEnabled(false);
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         this.tomarIngFecFin();
         this.tomarIngRazMant();
         this.gl.tomarIngFecFin(IngFecFin);
-        this.gl.tomarIngRazMant(IngRazMant);              //llamar a los metodos del gestor tomar ingfecfin y tomaringrazmant
+        this.gl.tomarIngRazMant(IngRazMant);
+        this.btnConfirmar.setEnabled(false);
+        this.txtRazMant.setEnabled(false);
+        this.txtFecFinMant.setEnabled(false);
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void txtFecFinMantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFecFinMantActionPerformed
-        this.tomarIngFecFin();        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFecFinMantActionPerformed
-
     private void btnConfirmarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarTurnoActionPerformed
         this.gl.tomarConfirmacion();
+        this.btnConfirmarTurno.setEnabled(false);
     }//GEN-LAST:event_btnConfirmarTurnoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         this.tomarSelFormaNotificacion();  
-       // TODO add your handling code here:
+        dispose();
+        GestorMenu gm =new GestorMenu();
+        gm.open();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void cbWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWhatsAppActionPerformed

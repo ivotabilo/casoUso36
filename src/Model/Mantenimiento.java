@@ -28,10 +28,11 @@ public class Mantenimiento implements Serializable {
     public Mantenimiento() {
     }
 
-    public Mantenimiento(Date fefhaFin, Date fechaInicio, String motivoMantenimiento) {
+    public Mantenimiento(Date fefhaFin, Date fechaInicio, String motivoMantenimiento,Date fechaInicioPrevista) {
         this.fechaFin = fefhaFin;
         this.fechaInicio = fechaInicio;
         this.motivoMantenimiento = motivoMantenimiento;
+        this.fechaInicioPrevista=fechaInicioPrevista;
     }
 
     public Integer getID() {

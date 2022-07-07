@@ -3,6 +3,7 @@ package Model;
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
+import Hibernate.GestorHibernate;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -25,7 +26,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 
 @Entity
-public class RecursoTecnologico extends implements Serializable {
+public class RecursoTecnologico extends GestorHibernate implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RecursoTecnologico_id_seq")
