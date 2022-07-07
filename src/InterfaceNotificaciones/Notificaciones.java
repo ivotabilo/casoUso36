@@ -24,17 +24,17 @@ import java.math.BigDecimal;
  *
  * @author sebac
  */
-public class Notificaciones extends GestorGn /*implements NotificacionesInterface*/ {
+public class Notificaciones extends GestorGn implements NotificacionesInterface {
     public final String ACCOUNT_SID = "ACc913ba7931b461bac444f3725dfb6fe7"; 
     public final String AUTH_TOKEN_WHATSAPP = ((Token) this.traerToken(Token.class, "whatsapp")).getToken(); 
     public final String AUTH_TOKEN_GMAIL = ((Token) this.traerToken(Token.class, "gmail")).getToken();
     // token vencido.. hacer que lo tome de data base para que no me lo den de baja de twilio
     
-   // @Override
+    @Override
     public void notificacionWhatsapp(String numeroPhone, String mensaje) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN_WHATSAPP); 
         Message message = Message.creator( 
-                new com.twilio.type.PhoneNumber("whatsapp:"+numeroPhone), 
+                new com.twilio.type.PhoneNumber("whatsapp:+5493571"+numeroPhone), 
                 new com.twilio.type.PhoneNumber("whatsapp:+14155238886"),  
                 "Hola! \n" + mensaje)      
             .create();  
@@ -50,7 +50,7 @@ public class Notificaciones extends GestorGn /*implements NotificacionesInterfac
         System.out.println("xx "+message.getApiVersion());*/
     }
 
-  //  @Override
+    @Override
     public void notificacionMail(String emailDestino, String mensaje) {
         Properties propiedad = new Properties();
         

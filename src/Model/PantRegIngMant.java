@@ -4,6 +4,8 @@ import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
 import Modelos.ABMGn;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -124,10 +126,15 @@ public class PantRegIngMant extends ABMGn {
         this.btnConfirmar.setEnabled(true);
     }
     
-    public void tomarIngFecFin(){
+    public void tomarIngFecFin() {
         //to-do (guardar en variable)
         //guardar fecha en variable
-        //this.IngFecFin= this.txtFecFinMant.getText(); //terminar
+        try {
+            this.IngFecFin = new SimpleDateFormat("dd/MM/yyyy").parse(this.txtFecFinMant.getText());
+        } catch (Exception e) {
+            System.out.println("ERROR AL PARSEAR STRING TO DATE" + e);
+        }
+        
     }
     
     public void tomarIngRazMant(){

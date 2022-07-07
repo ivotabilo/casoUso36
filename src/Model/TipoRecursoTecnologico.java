@@ -52,4 +52,11 @@ public class TipoRecursoTecnologico implements Serializable {
         TipoRecursoTecnologico p=(TipoRecursoTecnologico) o;
         return this.getNombre().compareTo(p.getNombre());
     }
+
+    @Override
+    public String toString() {
+        return nombre ;
+    }
+    
+    
 }

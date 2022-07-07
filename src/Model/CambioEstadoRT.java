@@ -37,6 +37,12 @@ public class CambioEstadoRT implements Serializable{
     public CambioEstadoRT() {
     }
 
+    public CambioEstadoRT(Date fechaHoraDesde, Estado estado) {
+        this.fechaHoraDesde = fechaHoraDesde;
+        this.estado = estado;
+    }
+    
+
     public Integer getID() {
         return ID;
     }

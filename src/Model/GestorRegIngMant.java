@@ -5,7 +5,10 @@ import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
 import InterfaceNotificaciones.Notificaciones;
+import InterfaceNotificaciones.NotificacionesInterface;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -284,7 +287,8 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void getFechaHoraActual(){
-        LocalDateTime.now();
+        //casteamos localdate a Date y zona horaria -3(arg)
+        this.fechaActual = Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3")));
         this.crearMantenimiento();
         //implementar
         //llamar a crear mantenimiento
@@ -294,16 +298,21 @@ public class GestorRegIngMant extends GestorGn{
         //to-do
         //implementar
         //+ notificar
-        this.SelRt.conocerCambioEstadoActual();
-        Mantenimiento m =new Mantenimiento();
+        this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
+        //this.actualizarObjeto(SelRt);
+        Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant);
         this.guardarObjeto(m);
+        
+        NotificacionesInterface n = new Notificaciones();
         if("Email".equals(tipoNotificacion)){
-            this.notificacion.notificacionMail(IngRazMant, IngRazMant);
+            n.notificacionMail(personalCientificoDeUsu.getCorreoElectronicoPersonal(), IngRazMant);
         }else if("WhatsApp".equals(tipoNotificacion)){
-            this.notificacion.notificacionWhatsapp(usuarioLog, IngRazMant); //FALTA TERMINAR
+            n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant); //FALTA TERMINAR
         }
         
     }
+    
+    
     
     public void open() {
         setForm(new PantRegIngMant());

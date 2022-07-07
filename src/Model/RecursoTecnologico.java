@@ -4,6 +4,8 @@ import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -198,9 +200,27 @@ public class RecursoTecnologico implements Serializable {
         return null;
     }*/
     
-    // devuelve el estado actual del recurso tecnologico
-    public CambioEstadoRT conocerCambioEstadoActual(){
-        return this.estadoActual;
+    
+    public void conocerCambioEstadoActual(Estado estadoNuevoRT, Estado estadoNuevoTurno){
+        // cerrar hora fin de estado actual rt
+        this.estadoActual.setFechaHoraHasta(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))));
+        //crear uno nuevo
+        CambioEstadoRT nuevoCambio = new CambioEstadoRT(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))),estadoNuevoRT);
+        // agregar a la lista
+        this.setCambioEstadoActual(nuevoCambio);
+        
+        for (Turno turnoRT :  turno) {
+            
+            turnoRT.crearNuevoCambioEstado(estadoNuevoTurno);
+            
+        }
+    }
+    
+    public void setCambioEstadoActual(CambioEstadoRT nuevoCambio){
+        cambioEstado.add(this.estadoActual);
+        // asignar el nuevo al actual
+        this.setEstadoActual(nuevoCambio);
+
     }
     
     public RecursoTecnologico conocerRT(){

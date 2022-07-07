@@ -17,7 +17,7 @@ public class Mantenimiento implements Serializable {
     private Integer ID;
     
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date fefhaFin;
+    private Date fechaFin;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaInicio;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -29,7 +29,7 @@ public class Mantenimiento implements Serializable {
     }
 
     public Mantenimiento(Date fefhaFin, Date fechaInicio, String motivoMantenimiento) {
-        this.fefhaFin = fefhaFin;
+        this.fechaFin = fefhaFin;
         this.fechaInicio = fechaInicio;
         this.motivoMantenimiento = motivoMantenimiento;
     }
@@ -43,11 +43,11 @@ public class Mantenimiento implements Serializable {
     }
 
     public Date getFefhaFin() {
-        return fefhaFin;
+        return fechaFin;
     }
 
-    public void setFefhaFin(Date fefhaFin) {
-        this.fefhaFin = fefhaFin;
+    public void setFefhaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public Date getFechaInicio() {
