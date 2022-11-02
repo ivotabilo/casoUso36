@@ -58,6 +58,8 @@ public class Notificaciones extends GestorGn implements NotificacionesInterface 
         propiedad.setProperty("mail.smtp.starttls.enable", "true");
         propiedad.setProperty("mail.smtp.port", "587");
         propiedad.setProperty("mail.smtp.auth", "true");
+        propiedad.setProperty("mail.transport.protocol", "smtp");
+        propiedad.setProperty("mail.host", "smtp.gmail.com");
         
         Session session = Session.getDefaultInstance(propiedad);
         
@@ -74,7 +76,6 @@ public class Notificaciones extends GestorGn implements NotificacionesInterface 
             mail.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(emailDestino));
             mail.setSubject(asunto);
             mail.setText(mensaje);
-            
             Transport transporte = session.getTransport("smtp");
             transporte.connect(emailSalida,pass);
             transporte.sendMessage(mail, mail.getRecipients(javax.mail.Message.RecipientType.TO));

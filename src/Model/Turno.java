@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -129,13 +130,16 @@ public class Turno implements Serializable {
         this.setActual(nuevoEstadoTurno);
     }
 
-    public void crearNuevoCambioEstado(Estado cambioEstado) {
+    public CambioEstadoTurno crearNuevoCambioEstado(Estado cambioEstado) {
         // al actual setearle fecha fin 
         this.actual.setFechaHoraHasta(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))));
         // agregarlo al array
+        this.cambioEstado.add(actual);
+        // y setearle el nuevo estado
         CambioEstadoTurno nuevoEstadoTurno = new CambioEstadoTurno(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))),cambioEstado);
         this.setCambioEstadoActual(nuevoEstadoTurno);
-        // y setearle el nuevo estado
+        
+        return nuevoEstadoTurno;
     }
    
     /*

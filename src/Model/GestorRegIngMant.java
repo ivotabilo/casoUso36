@@ -1,6 +1,7 @@
  package Model;
 
 import Generico.GestorGn;
+import Generico.SoporteEstado;
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
@@ -285,8 +286,21 @@ public class GestorRegIngMant extends GestorGn{
     }
     
     public void crearMantenimiento(){
-        this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
-        //this.actualizarObjeto(SelRt);
+        SoporteEstado se= this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
+        
+        //guardar turnos + cambio de estado
+        for(int i=0;i<=se.getLcet().size();i++) {
+            this.actualizarObjeto(se.getLcet().get(i));
+        }
+        
+        for(int i=0;i<=se.getLt().size();i++) {
+            this.actualizarObjeto(se.getLt().get(i));
+        }
+            
+        //guardar rt + cambio de estado
+        this.guardarObjeto(se.getCert());
+        this.actualizarObjeto(SelRt);
+        
         Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant,fechaActual);
         try{
             this.guardarObjeto(m);

@@ -1,5 +1,6 @@
 package Model;
 
+import Generico.SoporteEstado;
 import Generico.SoporteRT;
 import Generico.SoporteRT2;
 import Generico.SoporteTurno;
@@ -114,7 +115,6 @@ public class RecursoTecnologico implements Serializable {
         this.modelo = modelo;
     }
 
-    
     public Mantenimiento getMantenimiento() {
         return (Mantenimiento) mantenimiento;
     }
@@ -202,20 +202,26 @@ public class RecursoTecnologico implements Serializable {
     }*/
     
     
-    public void conocerCambioEstadoActual(Estado estadoNuevoRT, Estado estadoNuevoTurno){
+    public SoporteEstado conocerCambioEstadoActual(Estado estadoNuevoRT, Estado estadoNuevoTurno){
         // cerrar hora fin de estado actual rt
         this.estadoActual.setFechaHoraHasta(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))));
+        //guardar estado en el array 
+        this.cambioEstado.add(this.estadoActual);
         //crear uno nuevo
-        
         CambioEstadoRT nuevoCambio = new CambioEstadoRT(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))),estadoNuevoRT);
-        // agregar a la lista
+        //asignar a estado actual
         this.setCambioEstadoActual(nuevoCambio);
+        SoporteEstado soporteEstado  = new SoporteEstado(null,null,null);
+        soporteEstado.setCert(nuevoCambio);
         
-        for (Turno turnoRT :  turno) {
-            
-            turnoRT.crearNuevoCambioEstado(estadoNuevoTurno);
-            
+        List<CambioEstadoTurno> listaCambioTurno = new ArrayList<>();
+        
+        for (Turno turnoRT :  turno) { 
+            listaCambioTurno.add(turnoRT.crearNuevoCambioEstado(estadoNuevoTurno));
         }
+        soporteEstado.setLcet(listaCambioTurno);
+        soporteEstado.setLt(turno);
+        return soporteEstado;
     }
     
     public void setCambioEstadoActual(CambioEstadoRT nuevoCambio){
