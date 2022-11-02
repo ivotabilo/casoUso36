@@ -123,7 +123,6 @@ public class Turno implements Serializable {
     public void setActual(CambioEstadoTurno actual) {
         this.actual = actual;
     }
-
     
     public void setCambioEstadoActual(CambioEstadoTurno nuevoEstadoTurno) {
         this.cambioEstado.add(actual);
@@ -141,9 +140,4 @@ public class Turno implements Serializable {
         
         return nuevoEstadoTurno;
     }
-   
-    /*
-    crearNuevoCambioEstado
-    setCambioEstadoActual
-    */
 }

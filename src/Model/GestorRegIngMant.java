@@ -289,11 +289,11 @@ public class GestorRegIngMant extends GestorGn{
         SoporteEstado se= this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
         
         //guardar turnos + cambio de estado
-        for(int i=0;i<=se.getLcet().size();i++) {
-            this.actualizarObjeto(se.getLcet().get(i));
+        for(int i=0;i<se.getLcet().size();i++) {
+            this.guardarObjeto(se.getLcet().get(i));
         }
         
-        for(int i=0;i<=se.getLt().size();i++) {
+        for(int i=0;i<se.getLt().size();i++) {
             this.actualizarObjeto(se.getLt().get(i));
         }
             
@@ -317,9 +317,11 @@ public class GestorRegIngMant extends GestorGn{
             }else if("WhatsApp".equals(tipoNotificacion)){
                 n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant);
             }
+            this.getForm().cerrarSesion();
         }
         catch(Exception e){
             System.out.println(e);
+            this.getForm().cerrarSesion();
         }  
     }
     

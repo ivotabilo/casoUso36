@@ -177,7 +177,7 @@ public class RecursoTecnologico implements Serializable {
     }
     
     public Set<SoporteTurno> buscarTurnosConfPend(){
-        Set<SoporteTurno> turnos = new HashSet<SoporteTurno>(); 
+        Set<SoporteTurno> turnos = new HashSet<>(); 
         for (int i=0;i<this.turno.size();i++){
             if(this.turno.get(i).esRangoFecha()){
                 if(this.turno.get(i).conocerEstadoActual()){
