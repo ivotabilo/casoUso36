@@ -68,11 +68,7 @@ public class Turno implements Serializable {
         this.asignacion = asignacion;
     }
     public boolean esRangoFecha(){
-        if (fechaHoraInicio.getTime() >= Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))).getTime() ){
-            return true;
-        } else {
-            return false;
-        }
+        return fechaHoraInicio.getTime() >= Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))).getTime();
         
     }
     public boolean conocerEstadoActual(){
@@ -131,13 +127,17 @@ public class Turno implements Serializable {
 
     public CambioEstadoTurno crearNuevoCambioEstado(Estado cambioEstado) {
         // al actual setearle fecha fin 
-        this.actual.setFechaHoraHasta(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))));
+        this.actual.setFechaHoraHasta(new Date());
         // agregarlo al array
         this.cambioEstado.add(actual);
         // y setearle el nuevo estado
-        CambioEstadoTurno nuevoEstadoTurno = new CambioEstadoTurno(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))),cambioEstado);
+        CambioEstadoTurno nuevoEstadoTurno = new CambioEstadoTurno(new Date(),cambioEstado);
         this.setCambioEstadoActual(nuevoEstadoTurno);
-        
         return nuevoEstadoTurno;
+    }
+    
+    @Override
+    public String toString(){
+        return this.getID()+"";
     }
 }

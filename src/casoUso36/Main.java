@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package casoUso36;
 import Model.Login.GestorLogin;
 import Hibernate.HibernateUtil;
-import InterfaceNotificaciones.Notificaciones;
+import InterfaceNotificaciones.*;
 /**
  *
  * @author Juan
@@ -16,6 +11,7 @@ public class Main {
         HibernateUtil.inicializar();
         GestorLogin gl = new GestorLogin();
         gl.open();
-        
+        Notificaciones n = new Notificaciones();
+        //n.notificacionMail("nicolasarieldurelli@gmail.com","asdasdasda");
     }
 }

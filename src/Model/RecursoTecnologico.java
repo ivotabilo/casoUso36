@@ -211,16 +211,11 @@ public class RecursoTecnologico implements Serializable {
         CambioEstadoRT nuevoCambio = new CambioEstadoRT(Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("-3"))),estadoNuevoRT);
         //asignar a estado actual
         this.setCambioEstadoActual(nuevoCambio);
-        SoporteEstado soporteEstado  = new SoporteEstado(null,null,null);
-        soporteEstado.setCert(nuevoCambio);
-        
         List<CambioEstadoTurno> listaCambioTurno = new ArrayList<>();
-        
         for (Turno turnoRT :  turno) { 
             listaCambioTurno.add(turnoRT.crearNuevoCambioEstado(estadoNuevoTurno));
         }
-        soporteEstado.setLcet(listaCambioTurno);
-        soporteEstado.setLt(turno);
+        SoporteEstado soporteEstado  = new SoporteEstado(nuevoCambio,listaCambioTurno,turno); //CambioEstadoRT cert, List<CambioEstadoTurno> lcet, List<Turno> lt
         return soporteEstado;
     }
     

@@ -14,12 +14,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 //whatsapp
 import com.twilio.Twilio; 
-import com.twilio.converter.Promoter; 
 import com.twilio.rest.api.v2010.account.Message; 
-import com.twilio.type.PhoneNumber; 
- 
-import java.net.URI; 
-import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+import javax.swing.JOptionPane;
 /**
  *
  * @author sebac
@@ -41,54 +41,41 @@ public class Notificaciones extends GestorGn implements NotificacionesInterface 
         
  
         System.out.println(message.getSid()); 
-        /*System.out.println("\n");
-        System.out.println(message.getSid().toString()); 
-        System.out.println("\n"); 
-        System.out.println(message.getMessagingServiceSid());
-        System.out.println(message.getPrice());
-        System.out.println(message.getStatus());
-        System.out.println("xx "+message.getApiVersion());*/
     }
 
     @Override
     public void notificacionMail(String emailDestino, String mensaje) {
         Properties propiedad = new Properties();
-        
         propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
         propiedad.setProperty("mail.smtp.starttls.enable", "true");
         propiedad.setProperty("mail.smtp.port", "587");
         propiedad.setProperty("mail.smtp.auth", "true");
-        propiedad.setProperty("mail.transport.protocol", "smtp");
-        propiedad.setProperty("mail.host", "smtp.gmail.com");
-        
-        Session session = Session.getDefaultInstance(propiedad);
-        
-        String emailSalida = "casodeuso36@gmail.com";
-        String pass = AUTH_TOKEN_GMAIL; 
-        
-        String asunto = "Mantenimiento RT";
-        
-        MimeMessage mail = new MimeMessage(session);
-        
+        Session sesion = Session.getDefaultInstance(propiedad);
+        String correoEnvia = "casodeuso36@gmail.com";
+        String contrasena = AUTH_TOKEN_GMAIL;
+        String receptor = emailDestino;
+        String asunto = "Cancelacion por mantenimiento correctivo";
+        MimeMessage mail = new MimeMessage(sesion);
         try {
+            try {
+                mail.setFrom(new InternetAddress(correoEnvia));
+                mail.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress (receptor));
+                mail.setSubject(asunto);
+                mail.setText(mensaje);
             
-            mail.setFrom(new InternetAddress(emailSalida));
-            mail.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(emailDestino));
-            mail.setSubject(asunto);
-            mail.setText(mensaje);
-            Transport transporte = session.getTransport("smtp");
-            transporte.connect(emailSalida,pass);
-            transporte.sendMessage(mail, mail.getRecipients(javax.mail.Message.RecipientType.TO));
-            transporte.close();
-            
-        } catch (Exception e) {
-            System.out.println("ERROR MAIL. " + e.toString());
+                Transport transportar = sesion.getTransport("smtp");
+                transportar.connect(correoEnvia,contrasena);
+                transportar.sendMessage(mail, mail.getRecipients(javax.mail.Message.RecipientType.TO));          
+                transportar.close();
+                JOptionPane.showMessageDialog(null, "Correo Enviado");
+            } catch (AddressException ex) {
+                Logger.getLogger(Notificaciones.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (MessagingException ex) {
+            Logger.getLogger(Notificaciones.class.getName()).log(Level.SEVERE, null, ex);
         }
-                
     }
 
     public Notificaciones() {
     }
-    
-    
 }

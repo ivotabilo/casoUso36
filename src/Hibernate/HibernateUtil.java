@@ -15,7 +15,7 @@ public class HibernateUtil  {
                //coneccion con la base de datos
                 conf.setProperty("hibernate.connection.driver_class","org.postgresql.Driver");
                 conf.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQLDialect");                 
-                conf.setProperty("hibernate.connection.url","jdbc:postgresql://localhost:5432/TPIDisenio2");
+                conf.setProperty("hibernate.connection.url","jdbc:postgresql://localhost:5432/TPIDisenio");
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(null, "Error de Base de Datos N° 2001");

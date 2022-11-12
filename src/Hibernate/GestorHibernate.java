@@ -1,13 +1,9 @@
 package Hibernate;
 import java.awt.Component;
-import java.util.*;
 import javax.swing.JOptionPane;
-import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 public class GestorHibernate extends HibernateUtil {
 

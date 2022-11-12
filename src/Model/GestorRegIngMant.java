@@ -288,18 +288,33 @@ public class GestorRegIngMant extends GestorGn{
     public void crearMantenimiento(){
         SoporteEstado se= this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
         
-        //guardar turnos + cambio de estado
+        // + cambio de estado
         for(int i=0;i<se.getLcet().size();i++) {
-            this.guardarObjeto(se.getLcet().get(i));
+            try {
+               this.guardarObjeto((CambioEstadoTurno)se.getLcet().get(i)); 
+            } catch (Exception e) {
+               this.guardarObjeto((CambioEstadoTurno)se.getLcet().get(i));
+            }
+        }
+        //guardar turnos
+        for(int i=0;i<se.getLt().size();i++) {
+            try {
+               this.actualizaroguardaObjeto(se.getLt().get(i)); 
+            } catch (Exception e) {
+               this.actualizaroguardaObjeto(se.getLt().get(i));
+            }
+            
+        }
+        //cambio de estado
+        this.guardarObjeto(se.getCert());
+        //guardar rt +
+        try {
+            this.actualizaroguardaObjeto(SelRt); 
+        } catch (Exception e) {
+            this.actualizaroguardaObjeto(SelRt); 
         }
         
-        for(int i=0;i<se.getLt().size();i++) {
-            this.actualizarObjeto(se.getLt().get(i));
-        }
-            
-        //guardar rt + cambio de estado
-        this.guardarObjeto(se.getCert());
-        this.actualizarObjeto(SelRt);
+        
         
         Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant,fechaActual);
         try{
