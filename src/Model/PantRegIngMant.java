@@ -2,7 +2,9 @@ package Model;
 
 import Generico.SoporteRT;
 import Generico.SoporteTurno;
-import Model.Menu.GestorMenu;
+import Model.RecursoTecnologico;
+import Model.Sesion;
+import Model.Turno;
 import Modelos.ABMGn;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -155,12 +157,13 @@ public class PantRegIngMant extends ABMGn {
     public void tomarSelFormaNotificacion(){
       //guardar en variable el tipo de notificacion seleccionado
       //llamar al gestor tomarselformanotificacion
-       if (this.cbEmail.isSelected()== true){
-        this.tipoNotificacion="Email";
-       }else{
-          this.tipoNotificacion="WhatsApp";
+      if (this.cbEmail.isSelected()== true && this.cbWhatsApp.isSelected()== true){
+        this.gl.tomarSelFormaNotificacion("e+w");
+      }if(this.cbEmail.isSelected()== true){
+        this.gl.tomarSelFormaNotificacion("e");
+      }else{
+        this.gl.tomarSelFormaNotificacion("w");
       }
-      this.gl.tomarSelFormaNotificacion(tipoNotificacion);
     }
 
 
@@ -274,7 +277,7 @@ public class PantRegIngMant extends ABMGn {
                             .addComponent(txtFecFinMant, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbRazMant))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMantLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -472,37 +475,19 @@ public class PantRegIngMant extends ABMGn {
         dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void cbWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWhatsAppActionPerformed
-        int a=0;
-        if(this.cbWhatsApp.isSelected() && a==0){
-            this.cbEmail.setEnabled(false); 
-            this.btnAceptar.setEnabled(true);
-            a=1;
-          }else{
-            this.cbEmail.setEnabled(true);
-            this.btnAceptar.setEnabled(false);
-            a=0;
-        }
-    }//GEN-LAST:event_cbWhatsAppActionPerformed
-
-    private void cbEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmailActionPerformed
-        int b=0;
-        if(this.cbEmail.isSelected() && b==0){
-            this.cbWhatsApp.setEnabled(false); 
-            this.btnAceptar.setEnabled(true);
-            b=1;
-          }else{
-            this.cbWhatsApp.setEnabled(true);
-            this.btnAceptar.setEnabled(false);
-            b=0;
-        }
-    }//GEN-LAST:event_cbEmailActionPerformed
-
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
         //cierra la sesion
         cerrarSesion();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void cbEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEmailActionPerformed
+        this.btnAceptar.setEnabled(true);
+    }//GEN-LAST:event_cbEmailActionPerformed
+
+    private void cbWhatsAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbWhatsAppActionPerformed
+        this.btnAceptar.setEnabled(true);
+    }//GEN-LAST:event_cbWhatsAppActionPerformed
 
     public static void main(String args[]) {
         try {

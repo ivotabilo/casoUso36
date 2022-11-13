@@ -1,7 +1,7 @@
-/*
+/*/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+ *
 package InterfaceNotificaciones;
 
 import Generico.GestorGn;
@@ -23,14 +23,13 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author sebac
- */
-public class Notificaciones extends GestorGn implements NotificacionesInterface {
+ *
+public class Notificaciones extends GestorGn{
     public final String ACCOUNT_SID = "ACc913ba7931b461bac444f3725dfb6fe7"; 
     public final String AUTH_TOKEN_WHATSAPP = ((Token) this.traerToken(Token.class, "whatsapp")).getToken(); 
     public final String AUTH_TOKEN_GMAIL = ((Token) this.traerToken(Token.class, "gmail")).getToken();
-    // token vencido.. hacer que lo tome de data base para que no me lo den de baja de twilio
     
-    @Override
+    /*@Override
     public void notificacionWhatsapp(String numeroPhone, String mensaje) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN_WHATSAPP); 
         Message message = Message.creator( 
@@ -78,4 +77,4 @@ public class Notificaciones extends GestorGn implements NotificacionesInterface 
 
     public Notificaciones() {
     }
-}
+}*/

@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Generico;
 
 import Model.PersonalCientifico;
 import Model.Turno;
 
-/**
- *
- * @author Salocin0
- */
 public class SoporteTurno implements Comparable<SoporteTurno>{
     private Turno turno;
     private PersonalCientifico pc;
@@ -19,6 +11,13 @@ public class SoporteTurno implements Comparable<SoporteTurno>{
         return turno;
     }
 
+    public String getEmail(){
+        return this.pc.getCorreoElectronicoInstitucional();
+    }
+
+    public String getTelefono(){
+        return this.pc.getTelCelular()+"";
+    }
     public void setTurno(Turno turno) {
         this.turno = turno;
     }

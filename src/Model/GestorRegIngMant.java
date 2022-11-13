@@ -3,13 +3,20 @@
 import Generico.GestorGn;
 import Generico.SoporteEstado;
 import Generico.SoporteRT;
-import Generico.SoporteRT2;
 import Generico.SoporteTurno;
-import InterfaceNotificaciones.Notificaciones;
-import InterfaceNotificaciones.NotificacionesInterface;
+import InterfaceNotificaciones.IObserverNotificacion;
+import InterfaceNotificaciones.ISujetoNotificacion;
+import InterfaceNotificaciones.InterfazEmail;
+import InterfaceNotificaciones.InterfazWhatsapp;
+import Model.AsignacionResponsableTecnicoRT;
+import Model.CambioEstadoTurno;
+import Model.Estado;
+import Model.Mantenimiento;
+import Model.PersonalCientifico;
+import Model.RecursoTecnologico;
+import Model.Sesion;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,7 +27,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.table.DefaultTableModel;
 
-public class GestorRegIngMant extends GestorGn{
+public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
     private String usuarioLog;
     private Sesion activaSesion; 
     private PersonalCientifico personalCientificoDeUsu;
@@ -38,7 +45,10 @@ public class GestorRegIngMant extends GestorGn{
     private List<Estado> estados;
     private Estado estadosTurnos;
     private Estado estadosRT;
-    private Notificaciones notificacion;
+    //private Notificaciones notificacion;
+    private List<IObserverNotificacion> notificadores;
+    private List<String> emailCientifico;
+    private List<String> telefonoCientifico;
             
     private PantRegIngMant form;
 
@@ -222,7 +232,13 @@ public class GestorRegIngMant extends GestorGn{
        //llamar a buscar turnos confpend
        //llamar a ordenar turnos por cientifico
        this.turnosRT = this.SelRt.buscarTurnosConfPend();
-       this.turnosRtOrdenado = this.turnosRT;
+       this.turnosRtOrdenado=this.turnosRT;
+       /*for(int i=0;i>this.turnosRT.size(); i++){
+           this.turnosRtOrdenado.add(this.turnosRT.get(i));
+           this.emailCientifico.add(this.turnosRT.get(i).getEmail());
+           this.telefonoCientifico.add(this.turnosRT.get(i).getTelefono());
+       }*/
+       
        this.ordenarTurnosPorCientifico(turnosRtOrdenado);
        this.form.solConfirmacion(this.turnosRtOrdenado);
     }
@@ -249,6 +265,24 @@ public class GestorRegIngMant extends GestorGn{
     
     public void tomarSelFormaNotificacion(String tipoNotificacion){
         this.tipoNotificacion=tipoNotificacion;
+        //crear interfaces de observadores/
+        //suscribir interfaces de observadores/
+        if ("e+w".equals(tipoNotificacion)){
+            List<IObserverNotificacion> interfaces = new ArrayList<>();
+            IObserverNotificacion interfaceEmail = new InterfazEmail();
+            IObserverNotificacion interfaceWhatsapp = new InterfazWhatsapp();
+            interfaces.add(interfaceEmail);
+            interfaces.add(interfaceWhatsapp);
+            for(int i=0;i>interfaces.size();i++){
+                suscribir(interfaces.get(i));
+            }
+        }if("e".equals(tipoNotificacion)){
+            IObserverNotificacion interfaceEmail = new InterfazEmail();
+            suscribir(interfaceEmail);
+        }else{
+            IObserverNotificacion interfaceWhatsapp = new InterfazWhatsapp();
+            suscribir(interfaceWhatsapp);
+        }
         //llamar a buscarestado cancelado por mant corr
         this.buscarEstadoCanceladoPorMantCorr();
        
@@ -326,12 +360,7 @@ public class GestorRegIngMant extends GestorGn{
         }
         
         try{
-            NotificacionesInterface n = new Notificaciones();
-            if("Email".equals(tipoNotificacion)){
-                n.notificacionMail(personalCientificoDeUsu.getCorreoElectronicoPersonal(), IngRazMant);
-            }else if("WhatsApp".equals(tipoNotificacion)){
-                n.notificacionWhatsapp(personalCientificoDeUsu.getTelCelular()+"", IngRazMant);
-            }
+            this.notificar();
             this.getForm().cerrarSesion();
         }
         catch(Exception e){
@@ -379,5 +408,22 @@ public class GestorRegIngMant extends GestorGn{
         }
         return modelTabla;
     }  
+
+    @Override
+    public void suscribir(IObserverNotificacion o) {
+       this.notificadores.add(o);
+    }
+
+    @Override
+    public void eliminar(IObserverNotificacion o) {
+        this.notificadores.remove(o);
+    }
+
+    @Override
+    public void notificar() {
+        for(int i=0; i>this.notificadores.size();i++){
+            this.notificadores.get(i).notificarCientificos(this.emailCientifico,this.telefonoCientifico, IngRazMant);
+        }
+    }
     
 }
