@@ -159,7 +159,7 @@ public class PantRegIngMant extends ABMGn {
       //llamar al gestor tomarselformanotificacion
       if (this.cbEmail.isSelected()== true && this.cbWhatsApp.isSelected()== true){
         this.gl.tomarSelFormaNotificacion("e+w");
-      }if(this.cbEmail.isSelected()== true){
+      }else if(this.cbEmail.isSelected()== true){
         this.gl.tomarSelFormaNotificacion("e");
       }else{
         this.gl.tomarSelFormaNotificacion("w");

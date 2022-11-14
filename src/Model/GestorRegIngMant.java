@@ -8,13 +8,6 @@ import InterfaceNotificaciones.IObserverNotificacion;
 import InterfaceNotificaciones.ISujetoNotificacion;
 import InterfaceNotificaciones.InterfazEmail;
 import InterfaceNotificaciones.InterfazWhatsapp;
-import Model.AsignacionResponsableTecnicoRT;
-import Model.CambioEstadoTurno;
-import Model.Estado;
-import Model.Mantenimiento;
-import Model.PersonalCientifico;
-import Model.RecursoTecnologico;
-import Model.Sesion;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
@@ -159,7 +152,6 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
     public void nuevoIngMantCorre(){
         //busca usuario logueado
         this.buscarRtUsLog();
-//to-do
     }
     
     public void buscarRtUsLog(){
@@ -236,9 +228,7 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
        List<SoporteTurno> turnosa= new ArrayList(turnosRT);
        for(int i=0;i<turnosa.size(); i++){
            this.emailCientifico.add(turnosa.get(i).getEmail());
-           System.out.println(emailCientifico.get(i));
            this.telefonoCientifico.add(turnosa.get(i).getTelefono());
-           System.out.println(telefonoCientifico.get(i));
        }
        
        this.ordenarTurnosPorCientifico(turnosRtOrdenado);
@@ -247,17 +237,14 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
     
     public void ordenarTurnosPorCientifico(Set<SoporteTurno> turnosRtOrdenado){
         //ordenar por cientifico
-
         List<SoporteTurno> lista = new ArrayList<>(turnosRtOrdenado);
         Collections.sort(lista, new Comparator<SoporteTurno>(){
             public int compare(SoporteTurno obj1, SoporteTurno obj2) {
                 return (obj1.getPc().getApellido()+", "+obj1.getPc().getNombre()).compareTo(obj2.getPc().getApellido()+", "+obj2.getPc().getNombre());
             }
         });
-        
         turnosRtOrdenado.clear();
         turnosRtOrdenado.addAll(lista);
-
     }
     
     public void tomarConfirmacion(){
@@ -298,7 +285,6 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
                  this.estadosTurnos=this.estados.get(i);
            }
         }
-          
          this.buscarEstadoConIngMantCorrectivo();
     }
     
@@ -323,7 +309,6 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
     
     public void crearMantenimiento(){
         SoporteEstado se= this.SelRt.conocerCambioEstadoActual(this.estadosRT,this.estadosTurnos);
-        
         // + cambio de estado
         for(int i=0;i<se.getLcet().size();i++) {
             try {
@@ -339,7 +324,6 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
             } catch (Exception e) {
                this.actualizaroguardaObjeto(se.getLt().get(i));
             }
-            
         }
         //cambio de estado
         this.guardarObjeto(se.getCert());
