@@ -2,6 +2,7 @@ package InterfaceNotificaciones;
 
 import Generico.GestorGn;
 import Generico.Token;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,7 +19,11 @@ public class InterfazEmail extends GestorGn implements IObserverNotificacion{
     public final String AUTH_TOKEN_GMAIL = ((Token) this.traerToken(Token.class, "gmail")).getToken();
     
     private String mensaje;
-    private List<String> email;
+    private List<String> email = new ArrayList<>();
+    
+    public InterfazEmail(){
+        
+    }
     
     @Override
     public void notificarCientificos(List<String> email, List<String> whatsapp, String mensaje){
@@ -28,8 +33,8 @@ public class InterfazEmail extends GestorGn implements IObserverNotificacion{
     }
     
     public void enviarEmail(){
-        for(int i=0;i>email.size();i++){
-           Properties propiedad = new Properties();
+        for(int i=0;i<email.size();i++){
+            Properties propiedad = new Properties();
             propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
             propiedad.setProperty("mail.smtp.starttls.enable", "true");
             propiedad.setProperty("mail.smtp.port", "587");
@@ -53,10 +58,10 @@ public class InterfazEmail extends GestorGn implements IObserverNotificacion{
                 transportar.close();
                 JOptionPane.showMessageDialog(null, "Correo Enviado");
                 } catch (AddressException ex) {
-                    Logger.getLogger(Notificaciones.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(InterfazEmail.class.getName()).log(Level.SEVERE, null, ex);
                 }
             } catch (MessagingException ex) {
-                Logger.getLogger(Notificaciones.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(InterfazEmail.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }   
     }

@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -177,7 +178,7 @@ public class RecursoTecnologico implements Serializable {
     }
     
     public Set<SoporteTurno> buscarTurnosConfPend(){
-        Set<SoporteTurno> turnos = new HashSet<>();
+        Set<SoporteTurno> turnos = new TreeSet<>();
         for (int i=0;i<this.turno.size();i++){
             if(this.turno.get(i).esRangoFecha()){
                 if(this.turno.get(i).conocerEstadoActual()){

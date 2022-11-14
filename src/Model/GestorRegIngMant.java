@@ -46,9 +46,9 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
     private Estado estadosTurnos;
     private Estado estadosRT;
     //private Notificaciones notificacion;
-    private List<IObserverNotificacion> notificadores;
-    private List<String> emailCientifico;
-    private List<String> telefonoCientifico;
+    private List<IObserverNotificacion> notificadores = new ArrayList<>();
+    private List<String> emailCientifico = new ArrayList<>();
+    private List<String> telefonoCientifico = new ArrayList<>();
             
     private PantRegIngMant form;
 
@@ -233,11 +233,13 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
        //llamar a ordenar turnos por cientifico
        this.turnosRT = this.SelRt.buscarTurnosConfPend();
        this.turnosRtOrdenado=this.turnosRT;
-       /*for(int i=0;i>this.turnosRT.size(); i++){
-           this.turnosRtOrdenado.add(this.turnosRT.get(i));
-           this.emailCientifico.add(this.turnosRT.get(i).getEmail());
-           this.telefonoCientifico.add(this.turnosRT.get(i).getTelefono());
-       }*/
+       List<SoporteTurno> turnosa= new ArrayList(turnosRT);
+       for(int i=0;i<turnosa.size(); i++){
+           this.emailCientifico.add(turnosa.get(i).getEmail());
+           System.out.println(emailCientifico.get(i));
+           this.telefonoCientifico.add(turnosa.get(i).getTelefono());
+           System.out.println(telefonoCientifico.get(i));
+       }
        
        this.ordenarTurnosPorCientifico(turnosRtOrdenado);
        this.form.solConfirmacion(this.turnosRtOrdenado);
@@ -273,10 +275,10 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
             IObserverNotificacion interfaceWhatsapp = new InterfazWhatsapp();
             interfaces.add(interfaceEmail);
             interfaces.add(interfaceWhatsapp);
-            for(int i=0;i>interfaces.size();i++){
+            for(int i=0;i<interfaces.size();i++){
                 suscribir(interfaces.get(i));
             }
-        }if("e".equals(tipoNotificacion)){
+        }else if("e".equals(tipoNotificacion)){
             IObserverNotificacion interfaceEmail = new InterfazEmail();
             suscribir(interfaceEmail);
         }else{
@@ -347,8 +349,6 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
         } catch (Exception e) {
             this.actualizaroguardaObjeto(SelRt); 
         }
-        
-        
         
         Mantenimiento m =new Mantenimiento(IngFecFin, fechaActual, IngRazMant,fechaActual);
         try{
@@ -421,7 +421,7 @@ public class GestorRegIngMant extends GestorGn implements ISujetoNotificacion{
 
     @Override
     public void notificar() {
-        for(int i=0; i>this.notificadores.size();i++){
+        for(int i=0; i<this.notificadores.size();i++){
             this.notificadores.get(i).notificarCientificos(this.emailCientifico,this.telefonoCientifico, IngRazMant);
         }
     }

@@ -12,7 +12,7 @@ public class SoporteTurno implements Comparable<SoporteTurno>{
     }
 
     public String getEmail(){
-        return this.pc.getCorreoElectronicoInstitucional();
+        return this.pc.getCorreoElectronicoPersonal();
     }
 
     public String getTelefono(){
